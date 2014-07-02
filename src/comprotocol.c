@@ -10,8 +10,11 @@
 
 int main(void)
 {
+	// testing code
+	DDRA=0xf0
+	
     while(1)
     {
-        //TODO:: Please write your application code 
+		PORTA=0xff;
     }
 }
