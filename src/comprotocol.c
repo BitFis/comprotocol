@@ -7,14 +7,16 @@
 
 
 #include <avr/io.h>
+#include "co.h"
 
 int main(void)
 {
 	// testing code
-	DDRA=0xf0
+	DDRB=0xff;
+	DDRA=0x00;
 	
     while(1)
     {
-		PORTA=0xff;
+		f_co_switchinput();
     }
 }
