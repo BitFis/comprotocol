@@ -4,5 +4,6 @@
 *.atsuo
 *.cproj
 
-# Remove Debug folder
+# Remove Debug folder and generated documentation folder
 Debug/
+doc/doxy/
