@@ -33,10 +33,36 @@
 #define CO_H_
 
 #include <avr/io.h>
+#include <util/delay.h>
+#include <avr/interrupt.h>
 
-/************************************************************************/
-/*                                                                      */
-/************************************************************************/
-void f_co_switchinput();
+extern uint8_t co_byte;		// used to safe byte while reading
+extern uint8_t co_status;	// status of while reading
+extern uint8_t *co_cachpos;	// contains current position in message buffer
+
+extern uint8_t co_curinput; // current input remove later
+// REMOVE later used to output switch
+extern uint8_t co_debug_var;
+
+#define CO_IO_PORT 2
+
+#define WAITING 1 << 0
+#define READING 1 << 1
+#define WRITING 1 << 2
+#define BYTEWAITING 1 << 3 // neues byte empfangen und bereit
+#define BITREAD 1 << 7
+/*
+struct CO_STATUS_TYPE
+{
+	READING = WAITING;
+	WRITING = READ;
+	WAITING << 2;	
+};*/
+
+void f_co_readbit(uint8_t input);
+void f_co_inputchange();
+void f_co_initializeOverflowInterrupt();
+
+void f_co_update();
 
 #endif /* CO_H_ */

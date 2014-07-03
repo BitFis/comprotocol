@@ -36,10 +36,13 @@ int main(void)
 {
 	// testing code
 	DDRB=0xff;
-	DDRA=0x00;
+	DDRD=0x00;
+	
+	f_co_initializeOverflowInterrupt();
 	
     while(1)
     {
-		f_co_switchinput();
+	  //  f_co_outputDebug();
+		//f_co_inputchange();
     }
 }
