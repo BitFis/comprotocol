@@ -30,8 +30,18 @@
 
 #include "co.h"
 
-uint8_t co_byte = 0x01;
-uint8_t co_status = WAITING;
+//////////////////////////////////////////////////////////////////////////
+uint8_t tmp;
+
+volatile uint8_t co_byte = 0x00;
+volatile uint8_t co_status = 0x00;
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//uint8_t co_byte = 0x01;
+//uint8_t co_status = 0x00;
 uint8_t *co_cachpos = 0;
 
 uint8_t co_debug_var = 0;
@@ -41,59 +51,101 @@ uint8_t co_slower = 0x00;
 uint8_t co_tmp_status=0x00;
 uint8_t co_curinput = 0x00;
 
+
 /************************************************************************/
 /*                                                                      */
 /************************************************************************/
 void f_co_initializeOverflowInterrupt(){
 	// Timer 0 konfigurieren
-	TCCR0 = 5; //(1<<CS02); // Prescaler 1024
-	
-	GICR |= 0x01;
+	TCCR1B = CO_TIMERSPEED; //(1<<CS02); // Prescaler 1024
 	
 	// Overflow Interrupt erlauben
-	TIMSK |= (1<<TOIE0);
-	
-	// INT0 (PD2) auf fallende flanke reagieren
-	MCUCR = (MCUCR & ~0x06) |
-		 (1 << 1) |
-		 (0 << 0);
-	
+	TIMSK |= (1<<CO_USEDTIMER);	
 	
 	// Global Interrupts aktivieren
 	sei();
 }
 
-void f_co_readbit(uint8_t input)
+/*
+ * 
+ */
+void f_co_init_waitmode()
 {
-	if((co_byte & 0x80) != 0)
-		co_status |= BYTEWAITING;
+	// I-Flag temporaer speichern
+	tmp = SREG;
+	cli();
 	
+	// setzten des INT0 um bei einer Aenderung das
+	// lesen zu beginnen
+	// INT0 (PD2) auf fallende flanke reagieren
+	MCUCR |= (1 << ISC01);
+	MCUCR &= ~(1 << ISC00);
+
+	GICR |= (1 << INT0);
+	
+	// timer fuers erste deaktivieren, da noch keine Nachricht erhalten
+	TIMSK &= ~(1 << CO_USEDTIMER);
+	
+	SREG = tmp;
+}
+
+void f_co_processbyte(uint8_t byte)
+{
+	if(ISSET_BIT(co_status, MESSAGEREADING))
+	{
+		// Byte im Buffer abspeichern	
+	}
+	else
+	{
+		// Message kontrollieren
+		if(byte == CO_MESSAGEIDENTIFIER)
+			SET_BIT(co_status, MESSAGEREADING);
+		else
+			co_status = (1 << ERROR);
+	}
+	
+	// zurueck zum wartemodus wenn ein error erkannt wurde
+	if(ISSET_BIT(co_status, ERROR))
+	{
+		CLEAR_BIT(co_status, ERROR);
+		f_co_init_waitmode();
+	}
+}
+
+void f_co_readbit()
+{
+	// check if whole byte is read
+	tmp = co_byte & (1 << 7);
+
 	co_byte = co_byte << 1;
-	co_byte |= (input & 1 << CO_IO_PORT) >> CO_IO_PORT;
+	co_byte |= ((co_status & (1 << LASTREADBIT)) >> LASTREADBIT);
 	
-	if((co_status & BYTEWAITING) != 0)
+	if(tmp)
 	{
-		co_debug_var = co_byte;
-		co_status &= ~BYTEWAITING;
-		
-		// byte im speicher abspeichern
-		
-		
+		f_co_processbyte(co_byte);
 		co_byte = 0x01;
+		co_debug_var = 0xff;
 	}
+	else
+		co_debug_var = co_byte;
 }
 
 
-f_co_update(uint8_t input)
+void f_co_update()
 {
-	if(co_status & WRITING == 0)
+	if(ISSET_BIT(co_status, PROCESS))
 	{
-		co_status |= BITREAD & input;
-		f_co_readbit(input);
+		if(ISCLEAR_BIT(co_status, DELAY))
+		{
+			f_co_readbit();
+		}
+		
+		TOGGLE_BIT(co_status, DELAY);
+		CLEAR_BIT(co_status, PROCESS);
 	}
 }
 
-// TMP funcion remove later used to add something to the debüg
+// TMP function remove later used to add something to the debug
 void f_co_adddebug(char debugvalue, char bitpos)
 {
 	co_debug_var=(debugvalue & 1 << bitpos);
@@ -103,12 +155,32 @@ f_co_outputDebug()
 	PORTB=co_debug_var;
 }
 
+//////////////////////////////////////////////////////////////////////////
+
+// ISR used to catch message
+ISR(INT0_vect)
+{
+	GICR &= (1 << INT0);
+	TIMSK |= (1 << CO_USEDTIMER);
+	SET_BIT(co_status, DELAY);
+}
+
+ISR(TIMER1_OVF_vect)
+{
+	if((~PIND) & (1<<CO_PINREADING))
+		SET_BIT(co_status, LASTREADBIT);
+	else
+		CLEAR_BIT(co_status, LASTREADBIT);
+//	co_status = ( (((~PIND) & (1<<CO_PINREADING)) >> CO_PINREADING) << LASTREADBIT);
+	SET_BIT(co_status, PROCESS);
+}
+
 /*
 Der Overflow Interrupt Handler
 wird aufgerufen, wenn TCNT0 von
 255 auf 0 wechselt (256 Schritte),
 d.h. ca. alle 2 ms
-*/
+*
 #ifndef TIMER0_OVF_vect
 // Für ältere WinAVR Versionen z.B. WinAVR-20071221 
 #define TIMER0_OVF_vect TIMER0_OVF0_vect
@@ -152,5 +224,5 @@ ISR (TIMER0_OVF_vect)
     PORTA = ~sendA;
     PORTC = ~sendC;
 	
-	bSending = false;*/
-}
+	bSending = false;*
+}*/

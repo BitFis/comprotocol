@@ -30,6 +30,7 @@
 
 #include <avr/io.h>
 
+//#include "co.h"
 #include "co.h"
 
 int main(void)
@@ -38,11 +39,18 @@ int main(void)
 	DDRB=0xff;
 	DDRD=0x00;
 	
+	//f_co_initializeOverflowInterrupt();
+	
+	DDRB=0xff;
+	
 	f_co_initializeOverflowInterrupt();
+	
+	f_co_init_waitmode();
 	
     while(1)
     {
-	  //  f_co_outputDebug();
-		//f_co_inputchange();
+		f_co_update();
+		
+		PORTB = ~co_debug_var;
     }
 }
