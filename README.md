@@ -76,9 +76,44 @@ Die Checksumme wird erstellt indem man alle zuvor gesendeten bytes XOR miteinand
 
 Das *structure chart* aller Funktionen:
 
-![alt text](./images/Comprotocol_structurechart.png "Logo Title Text 1")
+![alt text](./images/Comprotocol_structurechart.png "structure chart)
 
 
 ## Funktionen Struktugram
 
 Alle Struktogramme:
+
+### f_co_initializeOverflowInterrupt
+
+![f_co_initializeOverflowInterrupt](./images/strg/f_co_initializeOverlowInterrupt.PNG "f_co_initializeOverflowInterrupt")
+
+### f_co_send
+
+![f_co_send](./images/strg/f_co_send.PNG "f_co_send")
+
+### f_co_sendText
+
+![f_co_sendText](./images/strg/f_co_sendText.PNG "f_co_sendText")
+
+### f_co_sendByte
+
+![f_co_sendByte](./images/strg/f_co_sendByte.PNG "f_co_sendByte")
+
+### f_co_sendBit
+
+![f_co_sendBit](./images/strg/f_co_sendBit.PNG "f_co_sendBit")
+
+### f_co_init_waitmode
+
+![f_co_init_waitmode](./images/strg/f_co_init_waitmode.PNG "f_co_init_waitmode")
+
+### f_co_update
+
+![f_co_init_waitmode](./images/strg/f_co_update.PNG "f_co_update")
+
+### f_co_processbyte
+
+![f_co_processbyte](./images/strg/f_co_processbyte.PNG "f_co_processbyte")
+
+
+
