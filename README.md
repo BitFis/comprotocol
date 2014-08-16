@@ -76,7 +76,7 @@ Die Checksumme wird erstellt indem man alle zuvor gesendeten bytes XOR miteinand
 
 Das *structure chart* aller Funktionen:
 
-![alt text](../gh-pages/images/Comprotocol_structurechart.png "structure chart)
+![Comprotocol_structurechart](../gh-pages/images/Comprotocol_structurechart.png "Comprotocol_structurechart")
 
 
 ## Funktionen Struktugram
