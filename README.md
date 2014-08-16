@@ -21,9 +21,9 @@ Des Prtokoll ist wie folgt aufgebaut:
 
 2. Oder einen Text übermitteln
 
-|| 1 Byte              |
-|--:| :-----------------: |
-|1| [Initialisierung](#Initialisierung)      |
+|| 1 Byte               |
+|--:| :---------------: |
+|1| Initialisierung    |
 |2| Ziel ID             |
 |3| Source ID           |
 |4| command(text) + textlänge  |
@@ -51,8 +51,11 @@ Die Source ID wird genutzt um zu erkenne, von wem die Nachricht ist und an wen m
 
 ### Command übermitteln
 
-Beim Command übermitteln wird bei dem command byte() das erste byte auf 0 gesetzt
+Beim Command übermitteln wird bei dem command byte(4) das erste byte auf 0 gesetzt. Die restlichen können zur übermittlung des Commands genutzt werden.
 
 ### Text übermitteln
 
+Beim Übermitteln eines Textes wird beim command byte(4) des erste byte auf 1 gesetzt und die restlichen bytes dafür genutzt, um die grösse der kommenden Nachricht zu übermitteln.
+
+### Checksum
 
