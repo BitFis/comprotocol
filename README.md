@@ -7,6 +7,6 @@ Ein sehr einfach gehaltenes Kommunikationsprotokoll. Das Protokoll wird für sch
 
 Des Prtokoll ist wie folgt aufgebaut:
 
-1 Entweder kann man einfach einen Command senden
-2 Oder einen Text übermitteln
+1. Entweder kann man einfach einen Command senden
+2. Oder einen Text übermitteln
 
