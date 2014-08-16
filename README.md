@@ -119,4 +119,4 @@ Alle Struktogramme:
 ## API
 
 Die Funktionsbeschreibungen und Dokumentation ist unter folgendem link zu finden:
-[http://bigz94.github.io/comprotocol/doc/doxy/html/index.html](http://bigz94.github.io/comprotocol/doc/doxy/html/index.html)
+[http://bigz94.github.io/comprotocol/doc/doxy/html/index.html](http://bigz94.github.io/comprotocol/doc/doxy/html/co_8h.html)
