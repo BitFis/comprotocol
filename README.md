@@ -53,9 +53,24 @@ Die Source ID wird genutzt um zu erkenne, von wem die Nachricht ist und an wen m
 
 Beim Command übermitteln wird bei dem command byte(4) das erste byte auf 0 gesetzt. Die restlichen können zur übermittlung des Commands genutzt werden.
 
+#### Kurze Command list
+
+Hier eine kurze liste der haupt commands. Das Protokoll wurde dafür gebaut, damit man jederzeit eigene commands hinzufügen kann.
+
+| byte | name |
+| ---- | ---- |
+| 000 0001 | Okey |
+| 000 0010 | Fehler: Neu senden |
+
 ### Text übermitteln
 
 Beim Übermitteln eines Textes wird beim command byte(4) des erste byte auf 1 gesetzt und die restlichen bytes dafür genutzt, um die grösse der kommenden Nachricht zu übermitteln.
 
 ### Checksum
+
+Benörigt um die erhaltenen bytes zu kontrollieren. Die checksumme ermöglicht es zu erkennen, ob ein fehler bei der Übermittlung entschaden ist.
+
+Die Checksumme wird erstellt indem man alle zuvor gesendeten bytes XOR miteinander verknüpft.
+
+
 
