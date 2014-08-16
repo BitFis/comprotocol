@@ -76,6 +76,9 @@ Die Checksumme wird erstellt indem man alle zuvor gesendeten bytes XOR miteinand
 
 Das *structure chart* aller Funktionen:
 
+![alt text](./images/Comprotocol_structurechart.png "Logo Title Text 1")
+
+
 ## Funktionen Struktugram
 
 Alle Struktogramme:
