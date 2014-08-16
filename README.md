@@ -85,32 +85,32 @@ Alle Struktogramme:
 
 ### f_co_initializeOverflowInterrupt
 
-![f_co_initializeOverflowInterrupt](./images/strg/f_co_initializeOverlowInterrupt.PNG "f_co_initializeOverflowInterrupt")
+![f_co_initializeOverflowInterrupt](../gh-pages/images/strg/f_co_initializeOverlowInterrupt.PNG "f_co_initializeOverflowInterrupt")
 
 ### f_co_send
 
-![f_co_send](./images/strg/f_co_send.PNG "f_co_send")
+![f_co_send](../gh-pages/images/strg/f_co_send.PNG "f_co_send")
 
 ### f_co_sendText
 
-![f_co_sendText](./images/strg/f_co_sendText.PNG "f_co_sendText")
+![f_co_sendText](../gh-pages/images/strg/f_co_sendText.PNG "f_co_sendText")
 
 ### f_co_sendByte
 
-![f_co_sendByte](./images/strg/f_co_sendByte.PNG "f_co_sendByte")
+![f_co_sendByte](../gh-pages/images/strg/f_co_sendByte.PNG "f_co_sendByte")
 
 ### f_co_sendBit
 
-![f_co_sendBit](./images/strg/f_co_sendBit.PNG "f_co_sendBit")
+![f_co_sendBit](../gh-pages/images/strg/f_co_sendBit.PNG "f_co_sendBit")
 
 ### f_co_init_waitmode
 
-![f_co_init_waitmode](./images/strg/f_co_init_waitmode.PNG "f_co_init_waitmode")
+![f_co_init_waitmode](../gh-pages/images/strg/f_co_init_waitmode.PNG "f_co_init_waitmode")
 
 ### f_co_update
 
-![f_co_init_waitmode](./images/strg/f_co_update.PNG "f_co_update")
+![f_co_init_waitmode](../gh-pages/images/strg/f_co_update.PNG "f_co_update")
 
 ### f_co_processbyte
 
-![f_co_processbyte](./images/strg/f_co_processbyte.PNG "f_co_processbyte")
+![f_co_processbyte](../gh-pages/images/strg/f_co_processbyte.PNG "f_co_processbyte")
