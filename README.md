@@ -8,9 +8,22 @@ Ein sehr einfach gehaltenes Kommunikationsprotokoll. Das Protokoll wird für sch
 Des Prtokoll ist wie folgt aufgebaut:
 
 1. Entweder kann man einfach einen Command senden
+
+| 1 Byte              |
+| :-----------------: |
+| initialisierung     |
+| Ziel ID             |
+| Source ID           |
+| command (max 127)   |
+| Checksumme          |
+
 2. Oder einen Text übermitteln
 
 | 1 Byte              |
 | :-----------------: |
 | initialisierung     |
-| initialisierung     |
+| Ziel ID             |
+| Source ID           |
+| command(text) + textlänge  |
+| TEXT (max 128byte)  |
+| Checksumme          |
