@@ -72,5 +72,10 @@ Benörigt um die erhaltenen bytes zu kontrollieren. Die checksumme ermöglicht e
 
 Die Checksumme wird erstellt indem man alle zuvor gesendeten bytes XOR miteinander verknüpft.
 
+## Structure chart
 
+Das *structure chart* aller Funktionen:
 
+## Funktionen Struktugram
+
+Alle Struktogramme:
