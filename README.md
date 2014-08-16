@@ -85,7 +85,7 @@ Alle Struktogramme:
 
 ### f_co_initializeOverflowInterrupt
 
-![f_co_initializeOverflowInterrupt](../gh-pages/images/strg/f_co_initializeOverlowInterrupt.PNG "f_co_initializeOverflowInterrupt")
+![f_co_initializeOverflowInterrupt](../gh-pages/images/strg/f_co_initializeOverlowInterrupt.PNG "Structure chart")
 
 ### f_co_send
 
