@@ -1,31 +1,16 @@
 /****************************************************************************
- * Copyright (C) 2012 by Matteo Franchin                                    *
+ * Copyright (C) 2012 by Emanuel Forster / Lucien Zuercher                   *
  *                                                                          *
- * This file is part of Box.                                                *
- *                                                                          *
- *   Box is free software: you can redistribute it and/or modify it         *
- *   under the terms of the GNU Lesser General Public License as published  *
- *   by the Free Software Foundation, either version 3 of the License, or   *
- *   (at your option) any later version.                                    *
- *                                                                          *
- *   Box is distributed in the hope that it will be useful,                 *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of         *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          *
- *   GNU Lesser General Public License for more details.                    *
- *                                                                          *
- *   You should have received a copy of the GNU Lesser General Public       *
- *   License along with Box.  If not, see <http://www.gnu.org/licenses/>.   *
+ * License MIT				                                                *
  ****************************************************************************/
 
 /**
  * @file co.h
- * @author Lucien
- * @date 3.7.2014
- * @brief File containing example of doxygen usage for quick reference.
+ * @author Emanuel Forster / Lucien Zuercher
+ * @date 8.8.2014
+ * @brief Funktionslibrary fuer das comprotocol
  *
- * Here typically goes a more extensive explanation of what the header
- * defines. Doxygens tags are words preceeded by either a backslash @\
- * or by an at symbol @@.
+ * Enthaelt die definitionen und Beschreibungen des files co.c
  */
 
 
@@ -37,33 +22,73 @@
 #include <avr/interrupt.h>
 #include <inttypes.h>
 
-volatile extern uint8_t co_byte;		// used to safe byte while reading
-volatile extern uint8_t co_status;	// status of while reading
+/**
+ * used to safe byte while reading
+ */
+volatile extern uint8_t co_byte;
+/**
+ * status of while reading
+ */
+volatile extern uint8_t co_status;
 
-extern uint8_t *co_cachpos;	// contains current position in message buffer
-
-
+/**
+ * contains current position in message buffer
+ */
+extern uint8_t *co_cachpos;
 
 extern uint8_t co_curinput; // current input remove later
 // REMOVE later used to output switch
 extern uint8_t co_debug_var;
 
-// Temporary Variable can be used everywhere
+/**
+ * Temporary Variable can be used everywhere
+ */
 extern uint8_t tmp;
 
 //////////////////////////////////////////////////////////////////////////
-// Simple bit operations
-//////////////////////////////////////////////////////////////////////////
+// Bit operations
+/**
+ * setzt das bit auf 1
+ * @param var Byte bei dem der Wert gesetzt wird
+ * @param bit Die nummer des bits (0-7)
+ */
 #define SET_BIT(var, bit) ((var) |= (1 << bit))
+/**
+ * setzt das bit auf 0
+ * @param var Byte bei dem der Wert gesetzt wird
+ * @param bit Die nummer des bits (0-7)
+ */
 #define CLEAR_BIT(var, bit) ((var) &= ~(1 << bit))
 
+/**
+ * kehrt das bit
+ * @param var Byte bei dem der Wert gesetzt wird
+ * @param bit Die nummer des bits (0-7)
+ */
 #define TOGGLE_BIT(var, bit) ((var) ^= (1 << bit))
 
+/**
+ * kontrolliert ob Bit 1 ist
+ * @param var Byte bei dem der Wert kontrolliert wird
+ * @param bit Die nummer des bits (0-7)
+ * @return bit ist 1?
+ */
 #define ISSET_BIT(var, bit) ((var) & (1 << bit))
+/**
+ * kontrolliert ob Bit 0 ist
+ * @param var Byte bei dem der Wert kontrolliert wird
+ * @param bit Die nummer des bits (0-7)
+ * @return bit ist 0?
+ */
 #define ISCLEAR_BIT(var, bit) (!ISSET_BIT(var, bit))
 
-//////////////////////////////////////////////////////////////////////////
-// genutzte status flags
+/**
+ * @brief Netzwerk Status
+ *
+ * Enthaelt den Netzwerkstatus. Damit erkennt man ob gelesen oder
+ * geschrieben wird und welchen process durchgefuehrt wird.
+ * Ebenso ob die Message Fertig gelesen/ geschrieben wurde.
+ */
 enum 
 {
 	READING,
@@ -75,36 +100,47 @@ enum
 	ERROR
 };
 
-//////////////////////////////////////////////////////////////////////////
-// einstellungen
+/**
+ * Timer typ einstellen
+ */
 #define CO_USEDTIMER TOIE1
+/**
+ * Geschwindigkeit des Timers anpassen
+ */
 #define CO_TIMERSPEED 3
+/**
+ * Pin wo gelesen wird einstellen.
+ * ! ACHTUNG !
+ * nur pin 2/3 kann ein "listening handler" hinzugefuegt werden.
+ */
 #define CO_PINREADING 2
-
+/**
+ * Identifikationsbyte
+ */
 #define CO_MESSAGEIDENTIFIER 0b10101010
 
-/*
-#define WAITING 1 << 0
-#define READING 1 << 1
-#define WRITING 1 << 2
-#define BYTEWAITING 1 << 3 // neues byte empfangen und bereit
-#define BITREAD 1 << 7
-/*
-struct CO_STATUS_TYPE
-{
-	READING = WAITING;
-	WRITING = READ;
-	WAITING << 2;	
-};*/
-
 void f_co_inputchange();
+/**
+ * initialisiert die Interrupt funktion, die fuer den lese und schreibe Zyklus genutzt wird.
+ */
 void f_co_initializeOverflowInterrupt();
-
+/**
+ * initialisiert den wartemodus. Heisst es wird auf eine Aenderung gewartet auf PIN 2 des PORTS B
+ */
 void f_co_init_waitmode();
-
+/**
+ * bit lesen
+ */
 void f_co_readbit();
+/**
+ * byte bearbeiten und dem buffer hinzufuegen
+ * @param byte Das eingelesene byte
+ */
 void f_co_processbyte(uint8_t byte);
-
+/** 
+ * update Funktion, die immer mindestens einmal im loop augerufen werden sollte, 
+ * damit die eingelesenen Informationen bearbeitet werden koennen.
+ */
 void f_co_update();
 
 #endif /* CO_H_ */
