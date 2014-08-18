@@ -1,16 +1,16 @@
 /****************************************************************************
- * Copyright (C) 2012 by Emanuel Forster / Lucien Zürcher                   *
+ * Copyright (C) 2014 by Emanuel Forster / Lucien ZÃ¼rcher                   *
  *                                                                          *
  * License MIT				                                                *
  ****************************************************************************/
 
 /**
  * @file co.h
- * @author Emanuel Forster / Lucien Zürcher
+ * @author Emanuel Forster / Lucien ZÃ¼rcher
  * @date 8.8.2014
- * @brief Funktionslibrary für das comprotocol
+ * @brief Funktionslibrary fÃ¼r das comprotocol
  *
- * Enthält die Funktionen von co.h.
+ * EnthÃ¤lt die Funktionen von co.h.
  * Eine Dokumentation aller funktionen ist im co.h zu finden
  */
  
@@ -168,7 +168,7 @@ wird aufgerufen, wenn TCNT0 von
 d.h. ca. alle 2 ms
 *
 #ifndef TIMER0_OVF_vect
-// Für ältere WinAVR Versionen z.B. WinAVR-20071221 
+// FÃ¼r Ã¤ltere WinAVR Versionen z.B. WinAVR-20071221 
 #define TIMER0_OVF_vect TIMER0_OVF0_vect
 #endif
 
