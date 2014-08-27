@@ -68,7 +68,7 @@ Beim Übermitteln eines Textes wird beim command byte(4) des erste byte auf 1 ge
 
 ### Checksum
 
-Benörigt um die erhaltenen bytes zu kontrollieren. Die checksumme ermöglicht es zu erkennen, ob ein fehler bei der Übermittlung entschaden ist.
+Wird benötigt um die erhaltenen bytes zu kontrollieren. Die checksumme ermöglicht es zu erkennen, ob ein fehler bei der Übermittlung entschaden ist.
 
 Die Checksumme wird erstellt indem man alle zuvor gesendeten bytes XOR miteinander verknüpft.
 
