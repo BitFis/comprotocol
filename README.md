@@ -59,8 +59,13 @@ Hier eine kurze liste der haupt commands. Das Protokoll wurde dafür gebaut, dam
 
 | byte | name |
 | ---- | ---- |
-| 000 0001 | Okey |
-| 000 0010 | Fehler: Neu senden |
+| [0]000 0001 | Okey |
+| [0]000 0010 | Fehler: Neu senden |
+| [0]001 xxxx | Tastencommand senden / empfangen |
+
+#### Tasten Command
+
+Der Tastencommand beginnt mit den bits 0001 als "Highernibble". xxxx Definiert den Tastencode.
 
 ### Text übermitteln
 
