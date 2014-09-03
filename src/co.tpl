@@ -139,7 +139,6 @@ BOXEXPORT void* f_co_theSecondFunction(void);
 */
 BOXEXPORT void f_co_theLastOne(void);
 
+#endif /* _CO_DOCUMENT_H */
 
 /****************************************************************************/
-
-#endif /* _CO_DOCUMENT_H */
