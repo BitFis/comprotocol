@@ -141,6 +141,127 @@ f_co_outputDebug()
 	PORTB=co_debug_var;
 }
 
+
+void f_co_SendText(char* p_sText){
+  
+    f_co_SendProtocollHeader(2);
+  
+    char nLength = strlen(p_sText);
+    char cCommand = (1<<7) & nLength;
+	//Command and Länge senden
+	f_co_SendByte(cCommand);
+	
+    char* Text_save = p_sText;
+
+    bool controll = true;
+    //Solange bis kein Zeichen mehr vorhanden
+    while(*p_sText != '\0' && controll){
+        controll = f_co_SendByte(*(p_sText));
+        p_sText++;
+    }
+	if(controll)
+	{
+		f_co_SendByte(checksum);
+	}
+    //Falls controll-bit != gesendetes-bit
+    else
+	{
+        //Eigene ID als ms warten
+        _delay_ms(10);
+        //Text erneut senden
+        f_co_SendText(Text_save);           
+    }	
+}
+
+void f_co_SendCommand(unsigned char p_cCommand){
+  
+    f_co_SendProtocollHeader(2);
+    bool controll = f_co_SendByte(p_cCommand);
+    
+	if(controll)
+	{
+		f_co_SendByte(checksum);
+	}
+    //Falls controll-bit != gesendetes-bit
+    else
+	{
+        //Eigene ID als ms warten
+        _delay_ms(10);
+        //Text erneut senden
+        f_co_SendCommand(p_cCommand);           
+    }	
+}
+
+bool f_co_SendByte(char p_cByte){
+	//Checksum XOR Verknüfen
+	checksum ^= p_cByte;
+    //Senden Anfangen mit letztem Bit
+    char cFilter = 0b10000000;
+    //Solange Filter > 0 (Schleife 8-mal durchlaufen)
+    while(cFilter != 0){
+        //Zu sendendes Bit herausfiltern
+        char cbit = p_cByte & cFilter;
+        //gefiltertes Bit senden
+        f_co_SendBit(cbit);
+        //warten
+        cFilter >>= 1;
+    }
+    return true;
+}
+
+void f_co_SendBit(char p_cBit){
+  
+	// bSending -> 1 = sendbereit, 0 = gesendet
+    //Warten Bis vorheriges Bit gesendet wurde
+    while(bSending)
+    {
+    }
+	
+    bSend = p_cBit;
+    bSending = true;
+}
+
+bool f_co_ControllSend(char p_cBitControll){
+    //Bit einlesen
+    DDRA = 0xFE;
+    char bit_read = ~PINA;
+  
+    if(p_cBitControll == 0){
+        if(bit_read == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        if(bit_read == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
+
+void f_co_SendProtocollHeader(char destination_id){
+  
+	DDRA = 0x80;
+    DDRC = 0x01;
+
+	checksum = 0;
+
+	char source_id = ID;
+  
+    bSending = true;
+    //4-mal 1/0 senden für Beginn
+	f_co_SendByte(0b10101010);
+	
+	//HEADER Daten senden
+    f_co_SendByte(destination_id);
+    f_co_SendByte(source_id);
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 // ISR used to catch message
@@ -160,6 +281,8 @@ ISR(TIMER1_OVF_vect)
 //	co_status = ( (((~PIND) & (1<<CO_PINREADING)) >> CO_PINREADING) << LASTREADBIT);
 	SET_BIT(co_status, PROCESS);
 }
+
+
 
 /*
 Der Overflow Interrupt Handler
