@@ -142,5 +142,28 @@ void f_co_processbyte(uint8_t byte);
  * damit die eingelesenen Informationen bearbeitet werden koennen.
  */
 void f_co_update();
-
+/**
+ * Sendet einen Text
+ */
+void f_co_SendText(char* p_cText);
+/**
+ Sendet einen Command
+ */
+void f_co_SendCommand(unsigned char p_cCommand){
+/**
+ * Sendet den Header einer neuen übetragung: start-byte, destination-id, source-id
+ */
+void f_co_SendProtocollHeader(char destination_id)
+/**
+ * Sendet ein Byte
+ */
+bool f_co_SendByte(char p_cByte);
+/**
+ * Sendet ein Bit
+ */
+void f_co_SendBit(char p_cBit);
+/**
+ * Kontrolliert ob das gesendete Bit ohne Kollision gesendet wurde
+ */
+bool f_co_ControllSend(char p_cBitControll);
 #endif /* CO_H_ */
