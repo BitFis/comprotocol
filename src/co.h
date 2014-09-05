@@ -147,13 +147,13 @@ void f_co_update();
  */
 void f_co_SendText(char* p_cText);
 /**
- Sendet einen Command
+ * Sendet einen Command
  */
-void f_co_SendCommand(unsigned char p_cCommand){
+void f_co_SendCommand(unsigned char p_cCommand);
 /**
  * Sendet den Header einer neuen übetragung: start-byte, destination-id, source-id
  */
-void f_co_SendProtocollHeader(char destination_id)
+void f_co_SendProtocollHeader(char destination_id);
 /**
  * Sendet ein Byte
  */
