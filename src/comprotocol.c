@@ -43,6 +43,8 @@ int main(void)
 	
 	DDRB=0xff;
 	
+	//SET_BIT(co_status, READING);
+	
 	f_co_initializeOverflowInterrupt();
 	
 	f_co_init_waitmode();

@@ -31,6 +31,8 @@ volatile extern uint8_t co_byte;
  */
 volatile extern uint8_t co_status;
 
+
+
 /**
  * contains current position in message buffer
  */
@@ -44,6 +46,13 @@ extern uint8_t co_debug_var;
  * Temporary Variable can be used everywhere
  */
 extern uint8_t tmp;
+
+extern uint8_t checksum;
+volatile extern uint8_t bSending;
+volatile extern uint8_t bSend;
+
+#define ID 1
+#define WRITE 0
 
 //////////////////////////////////////////////////////////////////////////
 // Bit operations
@@ -99,6 +108,14 @@ enum
 	MESSAGEREAD,
 	ERROR
 };
+
+/**
+ * Define boolean
+ */
+typedef uint8_t bool;
+
+#define true 1
+#define false 0
 
 /**
  * Timer typ einstellen

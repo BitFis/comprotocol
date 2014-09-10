@@ -23,6 +23,9 @@ volatile uint8_t co_byte = 0x00;
 volatile uint8_t co_status = 0x00;
 
 
+uint8_t checksum;
+volatile uint8_t bSending;
+volatile uint8_t bSend;
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -36,7 +39,6 @@ uint8_t co_slower = 0x00;
 
 uint8_t co_tmp_status=0x00;
 uint8_t co_curinput = 0x00;
-
 
 /************************************************************************/
 /*                                                                      */
@@ -131,6 +133,7 @@ void f_co_update()
 	}
 }
 
+
 // TMP function remove later used to add something to the debug
 void f_co_adddebug(char debugvalue, char bitpos)
 {
@@ -148,7 +151,7 @@ void f_co_SendText(char* p_sText){
   
     char nLength = strlen(p_sText);
     char cCommand = (1<<7) & nLength;
-	//Command and Länge senden
+	//Command and Lï¿½nge senden
 	f_co_SendByte(cCommand);
 	
     char* Text_save = p_sText;
@@ -193,7 +196,7 @@ void f_co_SendCommand(unsigned char p_cCommand){
 }
 
 bool f_co_SendByte(char p_cByte){
-	//Checksum XOR Verknüfen
+	//Checksum XOR Verknï¿½fen
 	checksum ^= p_cByte;
     //Senden Anfangen mit letztem Bit
     char cFilter = 0b10000000;
@@ -254,7 +257,7 @@ void f_co_SendProtocollHeader(char destination_id){
 	char source_id = ID;
   
     bSending = true;
-    //4-mal 1/0 senden für Beginn
+    //4-mal 1/0 senden fï¿½r Beginn
 	f_co_SendByte(0b10101010);
 	
 	//HEADER Daten senden
@@ -273,13 +276,44 @@ ISR(INT0_vect)
 }
 
 ISR(TIMER1_OVF_vect)
-{
-	if((~PIND) & (1<<CO_PINREADING))
-		SET_BIT(co_status, LASTREADBIT);
+{	
+	if(!WRITE)
+	{	
+		// read information
+		if((~PIND) & (1<<CO_PINREADING))
+			SET_BIT(co_status, LASTREADBIT);
+		else
+			CLEAR_BIT(co_status, LASTREADBIT);
+	//	co_status = ( (((~PIND) & (1<<CO_PINREADING)) >> CO_PINREADING) << LASTREADBIT);
+		SET_BIT(co_status, PROCESS);
+	}
 	else
-		CLEAR_BIT(co_status, LASTREADBIT);
-//	co_status = ( (((~PIND) & (1<<CO_PINREADING)) >> CO_PINREADING) << LASTREADBIT);
-	SET_BIT(co_status, PROCESS);
+	{	
+		/* Interrupt Aktion alle
+		(1000000/1024)/256 Hz = 3.814697 Hz
+		bzw.
+		1/3.814697 s = 262.144 ms  
+		*/
+	//	char sendA;
+		char sendC;
+		//Falls Bit = 0 ...
+		if(bSend == 0)
+		{
+			//... sende 0
+	//		sendA = 0;
+			sendC = 0;
+		}
+		else{
+			//... sende 1
+	   //     sendA = 128;
+			sendC = 1;
+		}
+	 //   PORTA = ~sendA;
+		PORTC = ~sendC;
+	
+		bSending = false;
+	}
+
 }
 
 
