@@ -47,7 +47,9 @@ int main(void)
 	
 	f_co_initializeOverflowInterrupt();
 	
-	f_co_init_waitmode();
+//	f_co_init_waitmode();
+	
+	f_co_SendText("Hello");
 	
     while(1)
     {

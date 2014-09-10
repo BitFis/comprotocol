@@ -52,7 +52,7 @@ volatile extern uint8_t bSending;
 volatile extern uint8_t bSend;
 
 #define ID 1
-#define WRITE 0
+#define WRITE 1
 
 //////////////////////////////////////////////////////////////////////////
 // Bit operations

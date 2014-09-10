@@ -216,12 +216,12 @@ void f_co_SendBit(char p_cBit){
   
 	// bSending -> 1 = sendbereit, 0 = gesendet
     //Warten Bis vorheriges Bit gesendet wurde
-    while(bSending)
+    while(bSending != 0)
     {
     }
 	
     bSend = p_cBit;
-    bSending = true;
+    bSending = 1;
 }
 
 bool f_co_ControllSend(char p_cBitControll){
@@ -256,7 +256,7 @@ void f_co_SendProtocollHeader(char destination_id){
 
 	char source_id = ID;
   
-    bSending = true;
+    bSending = 1;
     //4-mal 1/0 senden f�r Beginn
 	f_co_SendByte(0b10101010);
 	
@@ -294,13 +294,20 @@ ISR(TIMER1_OVF_vect)
 		bzw.
 		1/3.814697 s = 262.144 ms  
 		*/
-	//	char sendA;
+		if(bSending == 1)
+		{
+			bSending = 2;
+		}
+		else if(bSending == 2){
+			
+		
+		char sendA;
 		char sendC;
 		//Falls Bit = 0 ...
 		if(bSend == 0)
 		{
 			//... sende 0
-	//		sendA = 0;
+			sendA = 0;
 			sendC = 0;
 		}
 		else{
@@ -308,10 +315,11 @@ ISR(TIMER1_OVF_vect)
 	   //     sendA = 128;
 			sendC = 1;
 		}
-	 //   PORTA = ~sendA;
+	    PORTA = ~sendA;
 		PORTC = ~sendC;
 	
-		bSending = false;
+		bSending = 0;
+		}
 	}
 
 }
