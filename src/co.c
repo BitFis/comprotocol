@@ -14,7 +14,7 @@
  * Eine Dokumentation aller funktionen ist im co.h zu finden
  */
  
-#include "co.h"
+#include "../headers/co.h"
 
 //////////////////////////////////////////////////////////////////////////
 uint8_t tmp;
@@ -75,13 +75,19 @@ void f_co_init_waitmode()
 	TIMSK &= ~(1 << CO_USEDTIMER);
 	
 	SREG = tmp;
+	
+	// co_byte wieder zuruecksetzen
+	co_byte = 0x01;
 }
 
 void f_co_processbyte(uint8_t byte)
 {
 	if(ISSET_BIT(co_status, MESSAGEREADING))
 	{
-		// Byte im Buffer abspeichern	
+		// Byte im Buffer abspeichern
+		
+		// TMP REMOVE
+		
 	}
 	else
 	{

@@ -31,7 +31,7 @@
 #include <avr/io.h>
 
 //#include "co.h"
-#include "co.h"
+#include "headers/co.h"
 
 int main(void)
 {
