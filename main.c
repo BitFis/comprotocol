@@ -42,14 +42,8 @@ int main(void)
 	//f_co_initializeOverflowInterrupt();
 	
 	DDRB=0xff;
-	
-	//SET_BIT(co_status, READING);
-	
-	f_co_initializeOverflowInterrupt();
-	
-	f_co_init_waitmode();
-	
-//	f_co_SendText("Hello");
+		
+	f_co_InitProtocol();
 	
     while(1)
     {

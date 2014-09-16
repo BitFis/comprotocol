@@ -85,8 +85,7 @@ void f_co_processbyte(uint8_t byte)
 	if(ISSET_BIT(co_status, MESSAGEREADING))
 	{
 		// Byte im Buffer abspeichern
-		
-		// TMP REMOVE
+		co_MsgCache_append(co_byte);
 		
 	}
 	else

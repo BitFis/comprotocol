@@ -35,10 +35,24 @@
 * Enumirationen & Strukturen
 ****************************************************************************/
 
+/**
+ * Protokol Header definition
+ */
+typedef struct {
+	uint8_t Initialisation;	/**< Initialisierung */
+	uint8_t Target;	/**< Ziel Addresse */
+	uint8_t Source;	/**< Von Addresse */
+	uint8_t Command; /**< Befehl- oder Textinformationen */
+} co_type_header;
 
 /****************************************************************************
 * Funktionen
 ****************************************************************************/
+
+/**
+ * Initialisieren des Protokolles
+ */
+void f_co_InitProtocol();
 
 /** Send Funktionen **/
 
@@ -56,11 +70,23 @@ void f_co_SendCommand(unsigned char p_cCommand);
 
 /** Lese Funktionen **/
 
-/** NOT IMPLEMENTET */
+/**
+ * Eingelesene Message holen
+ * @return Zeiger auf den Anfang der Message
+ */
 uint8_t* f_co_GetMessage();
-/** NOT IMPLEMENTET */
+
+/**
+ * Gibt den eingelesenen Befehl zurueck
+ * @return Ungefiterter Befehl
+ */
 uint8_t f_co_GetCommand();
-/** NOT IMPLEMENTET **/
+
+/**
+ * Gibt den eingelesenen Tastencode zurueck wenn 
+ * in nach dem Protokoll eine Taste empfangen wurde.
+ * @return Tasten code
+ */
 uint8_t f_co_GetKey();
 
 #endif /* _CO_WRITE_H */

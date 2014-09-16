@@ -23,6 +23,11 @@
 * Includes
 ****************************************************************************/
 
+/** Extern **/
+#include <inttypes.h>
+
+/** Internal **/
+
 
 /****************************************************************************
 * Makros
@@ -66,6 +71,16 @@
 #define ISCLEAR_BIT(var, bit) (!ISSET_BIT(var, bit))
 
 /****************************************************************************
+* Konstanten
+****************************************************************************/
+
+/**
+ * Definiert den maximalen Speicher in Byte, den der Messagebuffer
+ * ausnutzen darf.
+ */
+#define CO_MAXMESSAGEBUFFER 20
+
+/****************************************************************************
 * Enumirationen & Strukturen
 ****************************************************************************/
 
@@ -87,10 +102,57 @@ typedef uint8_t bool;
 #define false 0
 
 /****************************************************************************
+* Globale Variablen
+****************************************************************************/
+
+/**
+ * Zeigt auf den start des Messagebuffers
+ */
+extern uint8_t* co_MsgCache_cache;
+
+/**
+ * Derzeitige Position des Zeigers der Messagebuffers
+ */
+extern uint8_t co_MsgCache_position;
+
+/****************************************************************************
 * Funktionen
 ****************************************************************************/
 
+/**
+ * Speicher, der fuer die Message genutzt wurde, wieder freigeben
+ */
+void f_co_MsgCache_release();
 
+/**
+ * Erstellt den Speicher fuer die Message
+ */
+void f_co_MsgCache_init();
+
+/**
+ * Fuegt ein gegebenes Byte nach dem Zeiger ein, wenn
+ * der maximale Speicher nicht ueberschritten ist
+ * @param value Das Byte welches hinzugefuegt wurde
+ */
+void f_co_MsgCache_append(uint8_t value);
+
+/**
+ * Den Zeiger an eine beliebige Position setzten.
+ * Muss kleiner als Maximal moegliche Speichergroesse 
+ * und groesser als 0 sein.
+ * @param position Neue Position des Zeigers
+ */
+void f_co_MsgCache_setPosition(uint8_t position);
+
+/**
+ * Zeiger auf den Start setzten
+ */
+void f_co_MsgCache_reset();
+
+/**
+ * Gibt die Anfangsposition des Messagespeichers zurueck
+ */
+uint8_t* f_co_MsgCache_getStart();
 
 #endif /* _CO_LIB_H */
 
