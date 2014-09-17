@@ -76,6 +76,9 @@ void f_co_SendCommand(unsigned char p_cCommand);
  */
 uint8_t* f_co_GetMessage();
 
+/** NOT IMPLEMENTED */
+bool f_co_MessageRead();
+
 /**
  * Gibt den eingelesenen Befehl zurueck
  * @return Ungefiterter Befehl
