@@ -33,7 +33,7 @@ void f_co_InitProtocol() {
 	else
 		f_co_SendText("Hello");
 		
-	co_MsgCache_init();
+	f_co_MsgCache_init();
 }
 
 /************************************************************************/
