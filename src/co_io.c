@@ -60,3 +60,19 @@ uint8_t f_co_GetKey()
 }
 
 /************************************************************************/
+
+void f_co_update()
+{
+	if(ISSET_BIT(co_status, PROCESS))
+	{
+		if(ISCLEAR_BIT(co_status, DELAY))
+		{
+			f_co_readbit();
+		}
+		
+		TOGGLE_BIT(co_status, DELAY);
+		CLEAR_BIT(co_status, PROCESS);
+	}
+}
+
+/************************************************************************/

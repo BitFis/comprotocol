@@ -89,6 +89,12 @@ uint8_t f_co_GetCommand();
  */
 uint8_t f_co_GetKey();
 
+/** 
+ * update Funktion, die immer mindestens einmal im loop augerufen werden sollte, 
+ * damit die eingelesenen Informationen bearbeitet werden koennen.
+ */
+void f_co_update();
+
 #endif /* _CO_WRITE_H */
 
 /****************************************************************************/

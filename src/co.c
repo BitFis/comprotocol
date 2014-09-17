@@ -124,21 +124,6 @@ void f_co_readbit()
 }
 
 
-void f_co_update()
-{
-	if(ISSET_BIT(co_status, PROCESS))
-	{
-		if(ISCLEAR_BIT(co_status, DELAY))
-		{
-			f_co_readbit();
-		}
-		
-		TOGGLE_BIT(co_status, DELAY);
-		CLEAR_BIT(co_status, PROCESS);
-	}
-}
-
-
 // TMP function remove later used to add something to the debug
 void f_co_adddebug(char debugvalue, char bitpos)
 {

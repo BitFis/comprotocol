@@ -139,12 +139,6 @@ void f_co_initializeOverflowInterrupt();
  */
 void f_co_init_waitmode();
 
-/** 
- * update Funktion, die immer mindestens einmal im loop augerufen werden sollte, 
- * damit die eingelesenen Informationen bearbeitet werden koennen.
- */
-void f_co_update();
-
 #endif /* CO_H_ */
 
 /****************************************************************************/
