@@ -35,6 +35,12 @@
 * Enumirationen & Strukturen
 ****************************************************************************/
 
+enum CO_READ_STATUS{
+	CO_READ_WAITING = 0;
+	CO_READ_HEADER = 1;
+	CO_READ_MESSAGE = 2;
+	CO_READ_CHECKSUM = 3;
+};
 
 /****************************************************************************
 * Funktionen
@@ -50,6 +56,12 @@ void f_co_readbit();
  * @param byte Das eingelesene byte
  */
 void f_co_processbyte(uint8_t byte);
+
+void f_co_processHeader();
+
+void f_co_checkValid(uint8_t byte);
+
+void f_co_processChecksum();
 
 #endif /* _CO_WRITE_H */
 
