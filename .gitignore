@@ -1,7 +1,6 @@
 
 # Remove ATMEL 6.x Project files
 *.atsuo
-*.cproj
 
 # Remove Debug folder and generated documentation folder
 Debug/

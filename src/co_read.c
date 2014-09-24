@@ -19,7 +19,10 @@
 
 #include "../headers/co.h"
 
-void f_co_processbyte(uint8_t byte)
+/************************************************************************/
+/* f_co_processbyte(byte)                                               */
+/************************************************************************/
+void f_co_processbyte(bool byte)
 {
 	if(ISSET_BIT(co_status, MESSAGEREADING))
 	{
@@ -31,9 +34,9 @@ void f_co_processbyte(uint8_t byte)
 	{
 		// Message kontrollieren
 		if(byte == CO_MESSAGEIDENTIFIER)
-		SET_BIT(co_status, MESSAGEREADING);
+			SET_BIT(co_status, MESSAGEREADING);
 		else
-		co_status = (1 << ERROR);
+			co_status = (1 << ERROR);
 	}
 	
 	// zurueck zum wartemodus wenn ein error erkannt wurde
@@ -44,10 +47,11 @@ void f_co_processbyte(uint8_t byte)
 	}
 }
 
-void f_co_readbit()
+/************************************************************************/
+/* f_co_readbit(byte)                                                   */
+/************************************************************************/
+void f_co_readbit(uint8_t byte)
 {
-	
-	
 	// check if whole byte is read
 	tmp = co_byte & (1 << 7);
 

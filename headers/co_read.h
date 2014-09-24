@@ -36,10 +36,10 @@
 ****************************************************************************/
 
 enum CO_READ_STATUS{
-	CO_READ_WAITING = 0;
-	CO_READ_HEADER = 1;
-	CO_READ_MESSAGE = 2;
-	CO_READ_CHECKSUM = 3;
+	CO_READ_WAITING = 0,
+	CO_READ_HEADER = 1,
+	CO_READ_MESSAGE = 2,
+	CO_READ_CHECKSUM = 3
 };
 
 /****************************************************************************
@@ -48,8 +48,9 @@ enum CO_READ_STATUS{
 
 /**
  * bit lesen
+ * @param byte byte eingelesen
  */
-void f_co_readbit();
+void f_co_readbit(uint8_t byte);
 
 /**
  * byte bearbeiten und dem buffer hinzufuegen

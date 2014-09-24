@@ -80,50 +80,6 @@ void f_co_init_waitmode()
 	co_byte = 0x01;
 }
 
-void f_co_processbyte(uint8_t byte)
-{
-	if(ISSET_BIT(co_status, MESSAGEREADING))
-	{
-		// Byte im Buffer abspeichern
-		f_co_MsgCache_append(co_byte);
-		
-	}
-	else
-	{
-		// Message kontrollieren
-		if(byte == CO_MESSAGEIDENTIFIER)
-			SET_BIT(co_status, MESSAGEREADING);
-		else
-			co_status = (1 << ERROR);
-	}
-	
-	// zurueck zum wartemodus wenn ein error erkannt wurde
-	if(ISSET_BIT(co_status, ERROR))
-	{
-		CLEAR_BIT(co_status, ERROR);
-		f_co_init_waitmode();
-	}
-}
-
-void f_co_readbit()
-{
-	// check if whole byte is read
-	tmp = co_byte & (1 << 7);
-
-	co_byte = co_byte << 1;
-	co_byte |= ((co_status & (1 << LASTREADBIT)) >> LASTREADBIT);
-	
-	if(tmp)
-	{
-		f_co_processbyte(co_byte);
-		co_byte = 0x01;
-		co_debug_var = 0xff;
-	}
-	else
-		co_debug_var = co_byte;
-}
-
-
 // TMP function remove later used to add something to the debug
 void f_co_adddebug(char debugvalue, char bitpos)
 {
@@ -269,13 +225,22 @@ ISR(TIMER1_OVF_vect)
 {	
 	if(!WRITE)
 	{	
-		// read information
-		if((~PIND) & (1<<CO_PINREADING))
-			SET_BIT(co_status, LASTREADBIT);
-		else
-			CLEAR_BIT(co_status, LASTREADBIT);
+		if(ISCLEAR_BIT(co_status, DELAY))
+		{
+			// read information
+			if((~PIND) & (1<<CO_PINREADING))
+				f_co_processbyte(1);
+			else
+				f_co_processbyte(0);
+		}
+		
+		TOGGLE_BIT(co_status, DELAY);
+		CLEAR_BIT(co_status, PROCESS);
+		
 	//	co_status = ( (((~PIND) & (1<<CO_PINREADING)) >> CO_PINREADING) << LASTREADBIT);
-		SET_BIT(co_status, PROCESS);
+	//	SET_BIT(co_status, PROCESS);
+		
+		// check if byte is read and save in cache if it is
 	}
 	else
 	{	

@@ -51,11 +51,11 @@ int main(void)
     {
 		f_co_update();
 		
-		char cTaste = c_fo_GET_TASTE();
+	/*	char cTaste = c_fo_GET_TASTE();
 		if(cTaste != 0){
 			char cCommand = 0b00010000 + cTaste;
 		  f_co_SendCommand(cCommand);
-		}
+		}*/
 		
 		PORTB = ~co_debug_var;
     }
