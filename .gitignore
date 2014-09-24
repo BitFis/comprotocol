@@ -1,6 +1,5 @@
 
 # Remove ATMEL 6.x Project files
-*.atsln
 *.atsuo
 *.cproj
 
