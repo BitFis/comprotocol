@@ -1,12 +1,12 @@
 /****************************************************************************
- * Copyright (C) 2014 by Emanuel Forster / Lucien Zürcher                   *
+ * Copyright (C) 2014 by Emanuel Foster / Lucien Zürcher                    *
  *                                                                          *
  * License MIT				                                                *
  ****************************************************************************/
 
 /**
  * @file co.h
- * @author Emanuel Forster / Lucien Zürcher
+ * @author Emanuel Foster / Lucien Zürcher
  * @date 8.8.2014
  * @brief Funktionslibrary für das comprotocol
  *

@@ -32,6 +32,8 @@
 
 //#include "co.h"
 #include "headers/co.h"
+#include "include/Display.c"
+#include "include/Matrix.c"
 
 int main(void)
 {
@@ -48,6 +50,12 @@ int main(void)
     while(1)
     {
 		f_co_update();
+		
+		char cTaste = c_fo_GET_TASTE();
+		if(cTaste != 0){
+			char cCommand = 0b00010000 + cTaste;
+		  f_co_SendCommand(cCommand);
+		}
 		
 		PORTB = ~co_debug_var;
     }
