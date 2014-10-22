@@ -1,3 +1,6 @@
+#ifndef _CO_DISPLAY_C
+#define _CO_DISPLAY_C
+
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -329,3 +332,5 @@ void f_co_LCD_INT(int p_Zahl)
 	}
 	f_co_write(naZahl[0]);
 }
+
+#endif /* _CO_DISPLAY_C */
