@@ -26,14 +26,14 @@
     <BootSegment>2</BootSegment>
     <eraseonlaunchrule>0</eraseonlaunchrule>
     <AsfFrameworkConfig>
-      <framework-data xmlns="">
+      <framework-data>
         <options />
         <configurations />
         <files />
         <documentation help="" />
         <offline-documentation help="" />
         <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.18.0" />
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.6.0" />
         </dependencies>
       </framework-data>
     </AsfFrameworkConfig>
@@ -139,10 +139,13 @@
     <Compile Include="headers\co_write.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Display.c">
+    <Compile Include="include\Disaply.h">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="include\Display.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Matrix.c">
+    <Compile Include="include\Matrix.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
