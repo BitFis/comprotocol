@@ -111,6 +111,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="headers\" />
+    <Folder Include="include\" />
     <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +137,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="headers\co_write.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Display.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Matrix.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
