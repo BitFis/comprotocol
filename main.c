@@ -40,23 +40,19 @@ int main(void)
 	// testing code
 	DDRB=0xff;
 	DDRD=0x00;
-	
-	//f_co_initializeOverflowInterrupt();
-	
-	DDRB=0xff;
-		
+			
 	f_co_InitProtocol();
 	
     while(1)
     {
 		f_co_update();
 		
-		char cTaste = f_co_GET_TASTE();
+	/*	char cTaste = f_co_GET_TASTE();
 		
 		if(cTaste != 0){
 			char cCommand = 0b00010000 + cTaste;
 		  f_co_SendCommand(cCommand);
-		}
+		}*/
 		
 		PORTB = ~co_debug_var;
     }
