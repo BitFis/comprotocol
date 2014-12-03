@@ -71,12 +71,22 @@ void f_co_readbit(bool bit)
 	{
 		// ganzes byte gelesen
 	//	f_co_processbyte(co_byte);
-		co_debug_var = co_byte;
+		
+	co_debug_var = co_byte;	
 		co_byte = 0x01;
+	}
+	// TMP debug
+	else if(ISCLEAR_BIT(co_status, MESSAGEREADING)){
+	co_debug_var &= 0xf0;
+	co_debug_var |= (ISSET_BIT(co_status, LASTREADBIT)) ? 1 : 0;
+	}
+	else {
+		co_debug_var = 0xff;
 	}
 	
 	if(bit)
 		SET_BIT(co_status, LASTREADBIT);
 	else
 		CLEAR_BIT(co_status, LASTREADBIT);
+		
 }

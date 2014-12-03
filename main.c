@@ -40,31 +40,24 @@ int main(void)
 	// testing code
 	DDRB=0xff;
 	DDRD=0x00;
-<<<<<<< HEAD
-	
-	//f_co_initializeOverflowInterrupt();
-	DDRA=0xff;
-	
-		
-=======
 			
->>>>>>> 846c0ff4ff8bc9bcf84d570db0ca5df904359e30
 	f_co_InitProtocol();
+	
     while(1)
     {
-		f_co_update();
 		
-	/*	char cTaste = f_co_GET_TASTE();
+		if(WRITE) {
 		
-		if(cTaste != 0){
-			char cCommand = 0b00010000 + cTaste;
-<<<<<<< HEAD
-			f_co_SendCommand(cCommand);
+			char cTaste = f_co_GET_TASTE();
+			
+			if(cTaste != 0){
+				char cCommand = 0b00010000 + cTaste;
+				f_co_SendCommand(cCommand);
+			}
 		}
-=======
-		  f_co_SendCommand(cCommand);
-		}*/
->>>>>>> 846c0ff4ff8bc9bcf84d570db0ca5df904359e30
+		else {
+			//f_co_update();
+		}
 		
 		PORTB = ~co_debug_var;
     }
