@@ -70,7 +70,17 @@ Der Tastencommand beginnt mit den bits 0001 als "Highernibble". xxxx Definiert d
 
 ### Text übermitteln
 
-Beim Übermitteln eines Textes wird beim command byte(4) des erste byte auf 1 gesetzt und die restlichen bytes dafür genutzt, um die grösse der kommenden Nachricht zu übermitteln.
+Beim Übermitteln eines Textes wird beim command byte(4) des erste byte auf 1 gesetzt und die restlichen bytes 
+dafür genutzt, um die grösse der kommenden Nachricht zu übermitteln. Setzt man den rest auf 0 wird eine Byte als
+Text übertragen. Setzt man alle restlichen 7 bits auf 1, dann werden 128 Bytes übertragen. Das heisst die der digitale 
+Wert der letzten sieben Bytes + 1 ergeben die Nachrichtenlänge in Bytes. Dadurch ist es möglich zwischen 1 - 128 Byte
+grosse Nachricht in einem Packet zu versenden.
+
+| Byte | Grösse |
+| ---- | ---- |
+| [1]000 0000 | 1 Byte |
+| [1]nnn nnnn | n + 1 Byte |
+| [1]111 1111 | 128 Byte |
 
 ### Checksum
 
