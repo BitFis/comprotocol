@@ -7,7 +7,7 @@
 
 #define RS 4
 #define E 5
-#define LCD PORTC
+#define LCD PORTA
 #define DISPLAY 2
 #define CURSOR 1
 #define CURSOR_B 0	
@@ -44,7 +44,7 @@ void f_co_LCD_INT(int p_Zahl);
 **************************************************************************/
 
 void f_co_LCD_Init(){
-	DDRC = 0xFF;
+	DDRA = 0xFF;
 	unsigned char byte;
 
 

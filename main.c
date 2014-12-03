@@ -51,8 +51,7 @@ int main(void)
 			char cTaste = f_co_GET_TASTE();
 			
 			if(cTaste != 0){
-				char cCommand = 0b00010000 + cTaste;
-				f_co_SendCommand(cCommand);
+				f_co_SendTaste(cTaste);
 			}
 		}
 		else {
