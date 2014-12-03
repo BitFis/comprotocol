@@ -91,6 +91,16 @@ f_co_outputDebug()
 }
 
 
+void f_co_SendTaste(char p_sTaste)
+{
+	f_co_LCD_Init();
+	f_co_LCD_STR("sending...");
+	char cCommand = 0b00010000 + p_sTaste;
+	f_co_SendCommand(cCommand);
+	f_co_LCD_CLR();
+	f_co_LCD_STR("finish :)");
+}
+
 void f_co_SendText(char* p_sText){
   
     f_co_SendProtocollHeader(2);
