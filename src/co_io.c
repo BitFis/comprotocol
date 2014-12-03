@@ -30,8 +30,6 @@ void f_co_InitProtocol() {
 	// temporaer statisch senden oder schreiben
 	if(!WRITE)
 		f_co_init_waitmode();
-	else
-		f_co_SendText("Hello");
 		
 	f_co_MsgCache_init();
 }

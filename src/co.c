@@ -267,7 +267,7 @@ ISR(TIMER1_OVF_vect)
 		}
 		else{
 			//... sende 1
-	   //     sendA = 128;
+			sendA = 128;
 			sendC = 1;
 		}
 	    PORTA = ~sendA;

@@ -140,7 +140,7 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\Disaply.h">
-      <SubType>Code</SubType>
+      <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\Display.h">
       <SubType>compile</SubType>
