@@ -95,7 +95,7 @@ void f_co_SendTaste(char p_sTaste)
 {
 	f_co_LCD_Init();
 	f_co_LCD_STR("sending...");
-	char cCommand = 0b00010000 + cTaste;
+	char cCommand = 0b00010000 + p_sTaste;
 	f_co_SendCommand(cCommand);
 	f_co_LCD_CLR();
 	f_co_LCD_STR("finish :)");

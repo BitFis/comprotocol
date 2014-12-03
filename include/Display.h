@@ -56,7 +56,7 @@ void f_co_LCD_Init(){
 	f_co_function_set(byte);	//Set DL at High
 	_delay_ms(10);
 	byte = 0b00000011;
-	function_set(byte);	//Set DL at High
+	f_co_function_set(byte);			//Set DL at High
 	_delay_ms(10);
 	byte = 0b00000010;
 	f_co_function_set(byte);	//Set DL at High
