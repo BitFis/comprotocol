@@ -224,14 +224,14 @@ ISR(INT0_vect)
 ISR(TIMER1_OVF_vect)
 {	
 	if(!WRITE)
-	{	
+	{			
 		if(ISCLEAR_BIT(co_status, DELAY))
 		{
 			// read information
 			if((~PIND) & (1<<CO_PINREADING))
-				f_co_processbyte(1);
+				f_co_readbit(1);
 			else
-				f_co_processbyte(0);
+				f_co_readbit(0);
 		}
 		
 		TOGGLE_BIT(co_status, DELAY);

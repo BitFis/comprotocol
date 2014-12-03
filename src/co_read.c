@@ -28,7 +28,6 @@ void f_co_processbyte(bool byte)
 	{
 		// Byte im Buffer abspeichern
 		f_co_MsgCache_append(co_byte);
-		
 	}
 	else
 	{
@@ -50,20 +49,34 @@ void f_co_processbyte(bool byte)
 /************************************************************************/
 /* f_co_readbit(byte)                                                   */
 /************************************************************************/
-void f_co_readbit(uint8_t byte)
+void f_co_readbit(bool bit)
 {
-	// check if whole byte is read
-	tmp = co_byte & (1 << 7);
-
-	co_byte = co_byte << 1;
-	co_byte |= ((co_status & (1 << LASTREADBIT)) >> LASTREADBIT);
+	bool tmp = co_byte & (1 << 7);
 	
-	if(tmp)
+	co_byte = co_byte << 1;
+	co_byte |= bit;
+	
+	// check if message is real
+	if(ISCLEAR_BIT(co_status, MESSAGEREADING))
 	{
-		f_co_processbyte(co_byte);
-		co_byte = 0x01;
-		co_debug_var = 0xff;
+		if(CO_MESSAGEIDENTIFIER == co_byte)
+		{
+			SET_BIT(co_status, MESSAGEREADING);
+			tmp = 1;
+		}
 	}
+	
+	// reads byte
+	if(ISSET_BIT(co_status, MESSAGEREADING) && tmp)
+	{
+		// ganzes byte gelesen
+	//	f_co_processbyte(co_byte);
+		co_debug_var = co_byte;
+		co_byte = 0x01;
+	}
+	
+	if(bit)
+		SET_BIT(co_status, LASTREADBIT);
 	else
-	co_debug_var = co_byte;
+		CLEAR_BIT(co_status, LASTREADBIT);
 }
