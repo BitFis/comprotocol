@@ -36,23 +36,31 @@ void f_co_MsgCache_release()
 
 void f_co_MsgCache_init()
 {
-	co_MsgCache_cache = malloc(CO_MAXMESSAGEBUFFER * sizeof(uint8_t));
+	co_MsgCache_cache = malloc(CO_MAXMESSAGEBUFFERSIZE * sizeof(uint8_t));
 	co_MsgCache_position = 0;
 }
 
 /************************************************************************/
 
-void f_co_MsgCache_append(uint8_t value)
+uint8_t f_co_MsgCache_append(uint8_t value)
 {
-	if(co_MsgCache_position < CO_MAXMESSAGEBUFFER)
+	if(co_MsgCache_position < CO_MAXMESSAGEBUFFERSIZE)
 		co_MsgCache_cache[co_MsgCache_position++] = value;
+	return co_MsgCache_position;
 }
 
 /************************************************************************/
 
 void f_co_MsgCache_setPosition(uint8_t position)
 {
-	position = position < CO_MAXMESSAGEBUFFER ? position : CO_MAXMESSAGEBUFFER - 1;
+	co_MsgCache_position = position < CO_MAXMESSAGEBUFFERSIZE ? position : CO_MAXMESSAGEBUFFERSIZE - 1;
+}
+
+/************************************************************************/
+
+void f_co_MsgCache_getPosition(uint8_t position)
+{
+	return co_MsgCache_position;
 }
 
 /************************************************************************/
