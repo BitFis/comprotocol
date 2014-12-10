@@ -78,7 +78,7 @@
  * Definiert den maximalen Speicher in Byte, den der Messagebuffer
  * ausnutzen darf.
  */
-#define CO_MAXMESSAGEBUFFER 20
+#define CO_MAXMESSAGEBUFFERSIZE 20
 
 /****************************************************************************
 * Enumirationen & Strukturen
@@ -134,7 +134,7 @@ void f_co_MsgCache_init();
  * der maximale Speicher nicht ueberschritten ist
  * @param value Das Byte welches hinzugefuegt wurde
  */
-void f_co_MsgCache_append(uint8_t value);
+uint8_t f_co_MsgCache_append(uint8_t value);
 
 /**
  * Den Zeiger an eine beliebige Position setzten.

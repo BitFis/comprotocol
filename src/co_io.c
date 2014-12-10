@@ -38,21 +38,21 @@ void f_co_InitProtocol() {
 
 uint8_t* f_co_GetMessage()
 {
-	return (f_co_MsgCache_getStart() + sizeof(co_type_header));
+	return (f_co_MsgCache_getStart() + sizeof(t_co_msg_header));
 }
 
 /************************************************************************/
 
 uint8_t f_co_GetCommand()
 {
-	return (*((co_type_header*)f_co_MsgCache_getStart())).Command;
+	return (*((t_co_msg_header*)f_co_MsgCache_getStart())).Info;
 }
 
 /************************************************************************/
 
 uint8_t f_co_GetKey()
 {
-	uint8_t tmp = (*((co_type_header*)f_co_MsgCache_getStart())).Command;
+	uint8_t tmp = (*((t_co_msg_header*)f_co_MsgCache_getStart())).Info;
 	// Taste ist 0 wenn keine Taste empfangen wurde
 	return (tmp & 0xf0) == 16 ? (tmp & 0x0f) : 0;
 }

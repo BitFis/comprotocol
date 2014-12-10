@@ -35,15 +35,6 @@
 * Enumirationen & Strukturen
 ****************************************************************************/
 
-/**
- * Protokol Header definition
- */
-typedef struct {
-	uint8_t Initialisation;	/**< Initialisierung */
-	uint8_t Target;	/**< Ziel Addresse */
-	uint8_t Source;	/**< Von Addresse */
-	uint8_t Command; /**< Befehl- oder Textinformationen */
-} co_type_header;
 
 /****************************************************************************
 * Funktionen

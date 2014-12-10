@@ -42,6 +42,37 @@ enum CO_READ_STATUS{
 	CO_READ_CHECKSUM = 3
 };
 
+/**
+ * Groesser der header struktur in bytes
+ */
+#define CO_READ_HEADERSIZE = 4
+
+/**
+ * Protokoll Messageheader-Struktur definition
+ */
+typedef struct {
+	uint8_t Initialisation;	/**< Initialisierung */
+	uint8_t Target;	/**< Ziel Addresse */
+	uint8_t Source;	/**< Von Addresse */
+	uint8_t Info; /**< Befehl- oder Textinformationen */
+} t_co_msg_header;
+
+/**
+ * Die Protokoll struktur einer gesendeten Text-message
+ */
+typedef struct {
+	t_co_msg_header header;
+	uint8_t* text;
+	uint8_t checksum; /** < Checksumme der gesendeten message - muss auf letzes byte zeigen */
+} t_co_msg_text;
+
+/**
+ * Die Message struktur für ein gesendeter command
+ */
+typedef struct {
+	uint8_t checksum /** < Checksumme der gesendeten message  */
+} t_co_msg_command;
+
 /****************************************************************************
 * Funktionen
 ****************************************************************************/

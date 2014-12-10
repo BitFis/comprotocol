@@ -24,10 +24,18 @@
 /************************************************************************/
 void f_co_processbyte(bool byte)
 {
+	// Byte im Buffer abspeichern
+	co_debug_var = f_co_MsgCache_append(co_byte);
+	
+	
+	
+	//t_co_msg_header* msg = 
+		/*
 	if(ISSET_BIT(co_status, MESSAGEREADING))
 	{
 		// Byte im Buffer abspeichern
-		f_co_MsgCache_append(co_byte);
+		
+		co_debug_var = f_co_MsgCache_append(co_byte);
 	}
 	else
 	{
@@ -43,7 +51,7 @@ void f_co_processbyte(bool byte)
 	{
 		CLEAR_BIT(co_status, ERROR);
 		f_co_init_waitmode();
-	}
+	}*/
 }
 
 /************************************************************************/
@@ -70,23 +78,22 @@ void f_co_readbit(bool bit)
 	if(ISSET_BIT(co_status, MESSAGEREADING) && tmp)
 	{
 		// ganzes byte gelesen
-	//	f_co_processbyte(co_byte);
-		
-	co_debug_var = co_byte;	
+		f_co_processbyte(co_byte);
 		co_byte = 0x01;
 	}
 	// TMP debug
 	else if(ISCLEAR_BIT(co_status, MESSAGEREADING)){
-	co_debug_var &= 0xf0;
-	co_debug_var |= (ISSET_BIT(co_status, LASTREADBIT)) ? 1 : 0;
+	//	co_debug_var &= 0xfD;
+	//	co_debug_var |= (ISSET_BIT(co_status, LASTREADBIT)) ? 1 : 0;
 	}
 	else {
-		co_debug_var = 0xff;
+		//co_debug_var = 0xff;
 	}
 	
 	if(bit)
 		SET_BIT(co_status, LASTREADBIT);
 	else
 		CLEAR_BIT(co_status, LASTREADBIT);
-		
+	
+	//co_debug_var = co_status;	
 }

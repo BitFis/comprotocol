@@ -171,6 +171,9 @@
     <None Include=".gitignore">
       <SubType>compile</SubType>
     </None>
+    <None Include="README.md">
+      <SubType>compile</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
