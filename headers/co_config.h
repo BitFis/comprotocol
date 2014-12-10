@@ -36,7 +36,7 @@
  * 0 : Lesen
  * 1 : Schreiben
  */
-#define WRITE 0
+#define WRITE_MODE 0
 
 #endif /* _CO_DOCUMENT_H */
 

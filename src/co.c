@@ -33,7 +33,7 @@ volatile uint8_t bSend;
 //uint8_t co_status = 0x00;
 uint8_t *co_cachpos = 0;
 
-uint8_t co_debug_var = 0;
+volatile uint8_t co_debug_var = 0;
 
 uint8_t co_slower = 0x00;
 

@@ -40,11 +40,20 @@ int main(void)
 	// testing code
 	DDRB=0xff;
 	DDRD=0x00;
+		
+	if(WRITE){
+		SET_BIT(co_status, WRITE);	
+	}else
+	{
+		CLEAR_BIT(co_status, WRITE);
+	}
 			
 	f_co_InitProtocol();
 	
     while(1)
     {
+		
+		f_co_update();
 		
 		if(WRITE) {
 		

@@ -45,7 +45,7 @@ enum CO_READ_STATUS{
 /**
  * Groesser der header struktur in bytes
  */
-#define CO_READ_HEADERSIZE = 4
+#define CO_READ_HEADERSIZE 4
 
 /**
  * Protokoll Messageheader-Struktur definition
@@ -92,6 +92,8 @@ void f_co_processbyte(uint8_t byte);
 void f_co_processHeader();
 
 void f_co_checkValid(uint8_t byte);
+
+void f_co_read_update();
 
 void f_co_processChecksum();
 

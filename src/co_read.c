@@ -24,34 +24,18 @@
 /************************************************************************/
 void f_co_processbyte(bool byte)
 {
-	// Byte im Buffer abspeichern
-	co_debug_var = f_co_MsgCache_append(co_byte);
+	f_co_MsgCache_append(co_byte);
+}
+
+/************************************************************************/
+/* f_co_processHeader()                                                   */
+/************************************************************************/
+void f_co_processHeader() {
 	
-	
-	
-	//t_co_msg_header* msg = 
-		/*
-	if(ISSET_BIT(co_status, MESSAGEREADING))
-	{
-		// Byte im Buffer abspeichern
-		
-		co_debug_var = f_co_MsgCache_append(co_byte);
-	}
-	else
-	{
-		// Message kontrollieren
-		if(byte == CO_MESSAGEIDENTIFIER)
-			SET_BIT(co_status, MESSAGEREADING);
-		else
-			co_status = (1 << ERROR);
-	}
-	
-	// zurueck zum wartemodus wenn ein error erkannt wurde
-	if(ISSET_BIT(co_status, ERROR))
-	{
-		CLEAR_BIT(co_status, ERROR);
-		f_co_init_waitmode();
-	}*/
+}
+
+void f_co_read_update() {
+	co_debug_var = co_status;
 }
 
 /************************************************************************/
@@ -70,6 +54,7 @@ void f_co_readbit(bool bit)
 		if(CO_MESSAGEIDENTIFIER == co_byte)
 		{
 			SET_BIT(co_status, MESSAGEREADING);
+			f_co_MsgCache_setPosition(0);
 			tmp = 1;
 		}
 	}
@@ -81,19 +66,10 @@ void f_co_readbit(bool bit)
 		f_co_processbyte(co_byte);
 		co_byte = 0x01;
 	}
-	// TMP debug
-	else if(ISCLEAR_BIT(co_status, MESSAGEREADING)){
-	//	co_debug_var &= 0xfD;
-	//	co_debug_var |= (ISSET_BIT(co_status, LASTREADBIT)) ? 1 : 0;
-	}
-	else {
-		//co_debug_var = 0xff;
-	}
 	
+	// information abspeichern fuer status
 	if(bit)
 		SET_BIT(co_status, LASTREADBIT);
 	else
 		CLEAR_BIT(co_status, LASTREADBIT);
-	
-	//co_debug_var = co_status;	
 }
