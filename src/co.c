@@ -98,7 +98,7 @@ void f_co_SendTaste(char p_sTaste)
 	char cCommand = 0b00010000 + p_sTaste;
 	f_co_SendCommand(cCommand);
 	f_co_LCD_CLR();
-	f_co_LCD_STR("finish :)");
+	f_co_LCD_STR("finish");
 }
 
 void f_co_SendText(char* p_sText){
@@ -133,10 +133,8 @@ void f_co_SendText(char* p_sText){
 }
 
 void f_co_SendCommand(unsigned char p_cCommand){
-  
     f_co_SendProtocollHeader(2);
     bool controll = f_co_SendByte(p_cCommand);
-    
 	if(controll)
 	{
 		f_co_SendByte(checksum);
@@ -151,7 +149,24 @@ void f_co_SendCommand(unsigned char p_cCommand){
     }	
 }
 
+void f_co_ConvertByteToStr(char p_cByte, char *sResult)
+{
+	char cPosition;
+	
+	for(cPosition = 0; cPosition < 8; cPosition++)
+	{
+		sResult[ 7 - cPosition] = ((p_cByte & (1 << cPosition)) >> cPosition) + '0';
+	}
+}
+
 bool f_co_SendByte(char p_cByte){
+	f_co_LCD_CLR();
+	f_co_LCD_STR("sending...");
+	f_co_LCD_RAM(16);
+	char sResult[9];
+	f_co_ConvertByteToStr(p_cByte, sResult);
+	sResult[8] = '\0';
+	f_co_LCD_STR(sResult);
 	//Checksum XOR Verkn�fen
 	checksum ^= p_cByte;
     //Senden Anfangen mit letztem Bit
@@ -205,7 +220,6 @@ bool f_co_ControllSend(char p_cBitControll){
 
 void f_co_SendProtocollHeader(char destination_id){
   
-	DDRA = 0x80;
     DDRC = 0x01;
 
 	checksum = 0;
@@ -265,22 +279,17 @@ ISR(TIMER1_OVF_vect)
 		}
 		else if(bSending == 2){
 			
-		
-		char sendA;
 		char sendC;
 		//Falls Bit = 0 ...
 		if(bSend == 0)
 		{
 			//... sende 0
-			sendA = 0;
 			sendC = 0;
 		}
 		else{
 			//... sende 1
-			sendA = 128;
 			sendC = 1;
 		}
-	    PORTA = ~sendA;
 		PORTC = ~sendC;
 	
 		bSending = 0;

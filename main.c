@@ -51,7 +51,7 @@ int main(void)
 			char cTaste = f_co_GET_TASTE();
 			
 			if(cTaste != 0){
-				f_co_SendTaste(cTaste);
+				f_co_SendTaste(cTaste - 1);
 			}
 		}
 		else {
