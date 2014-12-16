@@ -36,11 +36,8 @@
  * 0 : Lesen
  * 1 : Schreiben
  */
-<<<<<<< HEAD
+
 #define WRITE 1
-=======
-#define WRITE_MODE 0
->>>>>>> 78c7f56fa45666bb02b52da8f8f4c6e30a9f04f8
 
 #endif /* _CO_DOCUMENT_H */
 

@@ -56,7 +56,7 @@
  */
 enum 
 {
-	WRITE, /**< Information ob zurzeit geschrieben wird */
+	READING, /**< Information ob zurzeit geschrieben wird */
 	PROCESS, /**< Byte fertig gelesen. */
 	LASTREADBIT, /**< Zuletzt gelesenes Bit */
 	DELAY, /**< Aussetzen um jeden zweiten "clock" lesen */
