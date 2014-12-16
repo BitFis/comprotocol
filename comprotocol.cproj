@@ -163,15 +163,15 @@
     <Compile Include="src\co_read.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\co_write.c">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes">
       <SubType>compile</SubType>
     </None>
     <None Include=".gitignore">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="README.md">
       <SubType>compile</SubType>
     </None>
   </ItemGroup>

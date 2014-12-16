@@ -36,8 +36,11 @@
 extern uint8_t tmp;
 
 extern uint8_t checksum;
-volatile extern uint8_t bSending;
-volatile extern uint8_t bSend;
+volatile uint8_t bSending;
+volatile uint8_t sSendByte[255];
+volatile uint8_t cPointerSendByte;
+volatile uint8_t cPositionBit;
+volatile uint8_t cPaketGroesse;
 
 /****************************************************************************
 * Enumirationen & Strukturen
@@ -49,30 +52,36 @@ volatile extern uint8_t bSend;
 ****************************************************************************/
 
 /**
+ * Sendet einen Text
+ * @param Zu sendender Text
+ */
+void f_co_write_Text(char* p_sText);
+
+/**
+ * Sendet einen Command
+ * @param Zu sendender Command
+ */
+void f_co_write_Command(unsigned char p_cCommand);
+
+/**
  * Sendet den Header einer neuen übetragung: start-byte, destination-id, source-id
  * @param Destioation-ID
  */
-void f_co_SendProtocollHeader(char destination_id);
+void f_co_write_ProtocollHeader(char destination_id);
 
 /**
  * Sendet ein Byte
  * @param Zu sendendes Byte
  * @return Wurde Byte ohne Fehler gesendet 0 = Fehler, 1 = Kein Fehler
  */
-bool f_co_SendByte(char p_cByte);
-
-/**
- * Sendet ein Bit
- * @param Zu sendendes Bit
- */
-void f_co_SendBit(char p_cBit);
+bool f_co_write_Byte(char p_cByte);
 
 /**
  * Kontrolliert ob das gesendete Bit ohne Kollision gesendet wurde
  * @param Gesendetes Bit welche Kontrolliert werden soll
  * @return Wurde Byte ohne Fehler gesendet 0 = Fehler, 1 = Kein Fehler
  */
-bool f_co_ControllSend(char p_cBitControll);
+bool f_co_write_Controll(char p_cBitControll);
 
 #endif /* _CO_WRITE_H */
 

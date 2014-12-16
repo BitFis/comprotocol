@@ -47,18 +47,6 @@ void f_co_InitProtocol();
 
 /** Send Funktionen **/
 
-/**
- * Sendet einen Text
- * @param Zu sendender Text
- */
-void f_co_SendText(char* p_cText);
-
-/**
- * Sendet einen Command
- * @param Zu sendender Command
- */
-void f_co_SendCommand(unsigned char p_cCommand);
-
 /** Lese Funktionen **/
 
 /**

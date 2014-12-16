@@ -25,7 +25,10 @@ volatile uint8_t co_status = 0x00;
 
 uint8_t checksum;
 volatile uint8_t bSending;
-volatile uint8_t bSend;
+volatile uint8_t sSendByte[255];
+volatile uint8_t cPointerSendByte;
+volatile uint8_t cPositionBit;
+volatile uint8_t cPaketGroesse;
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -94,60 +97,40 @@ f_co_outputDebug()
 void f_co_SendTaste(char p_sTaste)
 {
 	f_co_LCD_Init();
-	f_co_LCD_STR("sending...");
 	char cCommand = 0b00010000 + p_sTaste;
-	f_co_SendCommand(cCommand);
+	f_co_write_Command(cCommand);
+	//Animation
+	f_co_CURB_OFF();
+	f_co_LCD_STR("sending ");
+	while(bSending != 0)
+	{
+		for(char Count = 0; Count < 3; Count++)
+		{
+			char Count2 = 0;
+			char cSavePositionBit = cPositionBit;
+			while(cSavePositionBit > 0)
+			{
+				Count2++;
+				cSavePositionBit = cSavePositionBit << 1;
+			}
+			char cProzentEnde = (cPointerSendByte * 8 + Count2) * 100 / (cPaketGroesse * 8);
+			_delay_ms(2000);
+			f_co_LCD_CHR('.');
+			f_co_LCD_RAM(16);
+			f_co_LCD_INT(cProzentEnde);
+			f_co_LCD_CHR('%');
+			f_co_LCD_RAM(8 + Count);
+		}
+		_delay_ms(2000);
+		
+		f_co_LCD_RAM(8);
+		f_co_LCD_STR("   ");
+		f_co_LCD_RAM(8);
+	}
 	f_co_LCD_CLR();
 	f_co_LCD_STR("finish");
 }
 
-void f_co_SendText(char* p_sText){
-  
-    f_co_SendProtocollHeader(2);
-  
-    char nLength = strlen(p_sText);
-    char cCommand = (1<<7) & nLength;
-	//Command and L�nge senden
-	f_co_SendByte(cCommand);
-	
-    char* Text_save = p_sText;
-
-    bool controll = true;
-    //Solange bis kein Zeichen mehr vorhanden
-    while(*p_sText != '\0' && controll){
-        controll = f_co_SendByte(*(p_sText));
-        p_sText++;
-    }
-	if(controll)
-	{
-		f_co_SendByte(checksum);
-	}
-    //Falls controll-bit != gesendetes-bit
-    else
-	{
-        //Eigene ID als ms warten
-        _delay_ms(10);
-        //Text erneut senden
-        f_co_SendText(Text_save);           
-    }	
-}
-
-void f_co_SendCommand(unsigned char p_cCommand){
-    f_co_SendProtocollHeader(2);
-    bool controll = f_co_SendByte(p_cCommand);
-	if(controll)
-	{
-		f_co_SendByte(checksum);
-	}
-    //Falls controll-bit != gesendetes-bit
-    else
-	{
-        //Eigene ID als ms warten
-        _delay_ms(10);
-        //Text erneut senden
-        f_co_SendCommand(p_cCommand);           
-    }	
-}
 
 void f_co_ConvertByteToStr(char p_cByte, char *sResult)
 {
@@ -157,82 +140,6 @@ void f_co_ConvertByteToStr(char p_cByte, char *sResult)
 	{
 		sResult[ 7 - cPosition] = ((p_cByte & (1 << cPosition)) >> cPosition) + '0';
 	}
-}
-
-bool f_co_SendByte(char p_cByte){
-	f_co_LCD_CLR();
-	f_co_LCD_STR("sending...");
-	f_co_LCD_RAM(16);
-	char sResult[9];
-	f_co_ConvertByteToStr(p_cByte, sResult);
-	sResult[8] = '\0';
-	f_co_LCD_STR(sResult);
-	//Checksum XOR Verkn�fen
-	checksum ^= p_cByte;
-    //Senden Anfangen mit letztem Bit
-    char cFilter = 0b10000000;
-    //Solange Filter > 0 (Schleife 8-mal durchlaufen)
-    while(cFilter != 0){
-        //Zu sendendes Bit herausfiltern
-        char cbit = p_cByte & cFilter;
-        //gefiltertes Bit senden
-        f_co_SendBit(cbit);
-        //warten
-        cFilter >>= 1;
-    }
-    return true;
-}
-
-void f_co_SendBit(char p_cBit){
-  
-	// bSending -> 1 = sendbereit, 0 = gesendet
-    //Warten Bis vorheriges Bit gesendet wurde
-    while(bSending != 0)
-    {
-    }
-	
-    bSend = p_cBit;
-    bSending = 1;
-}
-
-bool f_co_ControllSend(char p_cBitControll){
-    //Bit einlesen
-    DDRA = 0xFE;
-    char bit_read = ~PINA;
-  
-    if(p_cBitControll == 0){
-        if(bit_read == 0){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    else{
-        if(bit_read == 1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-}
-
-void f_co_SendProtocollHeader(char destination_id){
-  
-    DDRC = 0x01;
-
-	checksum = 0;
-
-	char source_id = ID;
-  
-    bSending = 1;
-    //4-mal 1/0 senden f�r Beginn
-	f_co_SendByte(0b10101010);
-	
-	//HEADER Daten senden
-    f_co_SendByte(destination_id);
-    f_co_SendByte(source_id);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -273,26 +180,34 @@ ISR(TIMER1_OVF_vect)
 		bzw.
 		1/3.814697 s = 262.144 ms  
 		*/
+		//Nur bei jedem zweiten mal senden
 		if(bSending == 1)
 		{
 			bSending = 2;
 		}
-		else if(bSending == 2){
-			
-		char sendC;
-		//Falls Bit = 0 ...
-		if(bSend == 0)
+		else if(bSending == 2)
 		{
-			//... sende 0
-			sendC = 0;
-		}
-		else{
-			//... sende 1
-			sendC = 1;
-		}
-		PORTC = ~sendC;
-	
-		bSending = 0;
+			bSending = 1;
+			char sendC = sSendByte[cPointerSendByte];
+			sendC = cPositionBit & sendC;
+			cPositionBit = cPositionBit >> 1;
+			//Prüfe ob Ende von Byte erreicht
+			if(cPositionBit == 0)
+			{
+				cPointerSendByte++;
+				cPositionBit = 0b10000000;
+			}
+			//Prüfe ob Ende erreicht
+			if(cPointerSendByte == cPaketGroesse)
+			{
+				bSending = 0;
+			}
+			//Falls Bit != 0 ...
+			if(sendC != 0)
+			{
+				sendC = 1;
+			}
+			PORTC = ~sendC;
 		}
 	}
 

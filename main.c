@@ -47,7 +47,6 @@ int main(void)
     {
 		
 		if(WRITE) {
-		
 			char cTaste = f_co_GET_TASTE();
 			
 			if(cTaste != 0){

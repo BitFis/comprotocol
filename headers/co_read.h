@@ -70,7 +70,7 @@ typedef struct {
  * Die Message struktur für ein gesendeter command
  */
 typedef struct {
-	uint8_t checksum /** < Checksumme der gesendeten message  */
+	uint8_t checksum; /** < Checksumme der gesendeten message  */
 } t_co_msg_command;
 
 /****************************************************************************
