@@ -46,6 +46,10 @@ uint8_t f_co_MsgCache_append(uint8_t value)
 {
 	if(co_MsgCache_position < CO_MAXMESSAGEBUFFERSIZE)
 		co_MsgCache_cache[co_MsgCache_position++] = value;
+		
+	// TMP
+	//co_debug_var = value;
+		
 	return co_MsgCache_position;
 }
 
