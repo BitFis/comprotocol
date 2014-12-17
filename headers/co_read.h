@@ -94,15 +94,25 @@ void f_co_readbit(uint8_t byte);
  */
 void f_co_processbyte(uint8_t byte);
 
+/**
+ * Veratbeitet den Nachrichten-Header und setzt laenge des Protokolls 
+ */
 void f_co_processHeader();
 
+/**
+ * Zuruecksetzten des Lesers, vorbereiten fuer eine neue Nachricht
+ */
 void f_co_resetReader();
 
-void f_co_checkValid(uint8_t byte);
+/**
+ * gibt die laenge der Nachricht an
+ */
+void f_co_getMsglength();
 
+/**
+ * Verarbeitet Nachrichtinformationen im normalen applikations loop
+ */
 void f_co_read_update();
-
-void f_co_processChecksum();
 
 #endif /* _CO_WRITE_H */
 
