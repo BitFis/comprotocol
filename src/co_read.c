@@ -28,7 +28,7 @@ uint8_t co_read_msglength = CO_MAXMESSAGEBUFFERSIZE;
 /************************************************************************/
 /* f_co_processbyte(byte)                                               */
 /************************************************************************/
-void f_co_processbyte(bool byte)
+void f_co_processbyte(char byte)
 {
 	f_co_MsgCache_append(byte);
 }
@@ -39,11 +39,9 @@ void f_co_processbyte(bool byte)
 void f_co_processHeader() {
 	t_co_msg_header* msgheader = ((t_co_msg_header*)f_co_MsgCache_append(co_byte));
 	
+	co_read_msglength = CO_READ_HEADERSIZE;
 	if(ISSET_BIT(msgheader->Info, 7)){
-		co_read_msglength = CO_READ_HEADERSIZE + 1 + msgheader->Info & 0x7f;
-		// summieren headersize, checksumme und textlaenge
-	}else{
-		co_read_msglength = CO_READ_HEADERSIZE + 1; // summieren headersize und checksumme
+		co_read_msglength += msgheader->Info & 0x7f;
 	}
 	
 	SET_BIT(co_status, HEADERPROCESSED);
@@ -58,14 +56,26 @@ void f_co_resetReader() {
 }
 
 /************************************************************************/
+/* f_co_processMsg()                                                 */
+/************************************************************************/
+void f_co_processMsg() {
+	 f_co_resetReader();
+	 
+	SET_BIT(co_status, HEADERPROCESSED);
+}
+
+/************************************************************************/
 /* f_co_read_update()                                                   */
 /************************************************************************/
 void f_co_read_update() {
-	if(co_MsgCache_position >= CO_READ_HEADERSIZE ){
-		f_co_processHeader();
-	}else if(co_MsgCache_position >= co_read_msglength){
-	//	SET_BIT(co_status, )
+	if(co_MsgCache_position >= CO_READ_HEADERSIZE){
+		if(ISCLEAR_BIT(co_status, HEADERPROCESSED))
+			f_co_processHeader();
+		else if(co_MsgCache_position >= co_read_msglength)
+			f_co_processMsg();
+		
 	}
+	
 	co_debug_var = co_status;
 }
 
