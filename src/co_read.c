@@ -38,11 +38,11 @@ void f_co_processHeader() {
 /* f_co_read_update()                                                   */
 /************************************************************************/
 void f_co_read_update() {
-	if(co_MsgCache_position >=  CO_READ_HEADERSIZE ){
-		co_debug_var = 0xff;
-	}/*else if(){
-		SET_BIT(co_status, )
-	}*/
+	if(co_MsgCache_position >= CO_READ_HEADERSIZE ){
+		f_co_processHeader();
+	}else if(co_MsgCache_position >= co_read_msglength){
+	//	SET_BIT(co_status, )
+	}
 //	co_debug_var = co_status;
 }
 
