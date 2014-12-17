@@ -37,7 +37,7 @@
  * 1 : Schreiben
  */
 
-#define WRITE 1
+#define WRITE 0
 
 #endif /* _CO_DOCUMENT_H */
 

@@ -76,7 +76,7 @@ typedef struct {
 /**
  * Enthaelt die laenge der Nachricht, die gerade gelesen wird.
  */
-extern char co_read_msglength = CO_MAXMESSAGEBUFFERSIZE;
+extern uint8_t co_read_msglength;
 
 /****************************************************************************
 * Funktionen
