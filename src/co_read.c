@@ -4,7 +4,7 @@
 * Dieses Dokument ist Teil von "comprotocol" *
 * *
 * Comprotocol ist eine frei zu nutzende Bibliothek. Die Bibliothek wird *
-* unter der MIT Lizens veröffentlicht. Jegliche Nutzung auf eigene Gefahr. *
+* unter der MIT Lizens verÃ¶ffentlicht. Jegliche Nutzung auf eigene Gefahr. *
 ****************************************************************************/
 /**
 * @file co_read.c
@@ -13,7 +13,7 @@
 * @brief Funktionen und Hilfsfunktionen zum Lesen einer Verbindung.
 *
 * Die hier vorhandenen Funktionen werden genutzt um eine Verbindung
-* gebgebenen Port abzuhoeren. Bit für Bit werden diese Informationen
+* gebgebenen Port abzuhoeren. Bit fÃ¼r Bit werden diese Informationen
 * nach einem gegebenen Tackt eingelesen und in auf Cache geschrieben.
 */
 
@@ -34,7 +34,15 @@ void f_co_processHeader() {
 	
 }
 
+/************************************************************************/
+/* f_co_read_update()                                                   */
+/************************************************************************/
 void f_co_read_update() {
+	if(co_MsgCache_position >=  CO_READ_HEADERSIZE ){
+		co_debug_var = 0xff;
+	}else if(){
+		SET_BIT(co_status, )
+	}
 	co_debug_var = co_status;
 }
 
