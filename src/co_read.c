@@ -41,6 +41,7 @@ void f_co_processHeader() {
 /************************************************************************/
 void f_co_resetReader() {
 	co_status = 0x00;
+	co_read_msglength = CO_MAXMESSAGEBUFFERSIZE;
 }
 
 /************************************************************************/
