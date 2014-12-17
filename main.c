@@ -65,7 +65,6 @@ int main(void)
 		else {
 			//f_co_update();
 		}
-		
-		PORTB = ~co_debug_var;
+			PORTB = ~co_debug_var;
     }
 }

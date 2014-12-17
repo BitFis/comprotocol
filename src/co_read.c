@@ -37,7 +37,6 @@ void f_co_processbyte(uint8_t byte)
 /* f_co_processHeader()                                                   */
 /************************************************************************/
 void f_co_processHeader() {
-	t_co_msg_header* msgheader = ((t_co_msg_header*)f_co_MsgCache_append(co_byte));
 	
 	co_read_msglength = f_co_getMsglength();
 	/*CO_READ_HEADERSIZE + 1;
@@ -51,7 +50,9 @@ void f_co_processHeader() {
 /************************************************************************/
 /* f_co_processHeader()                                                   */
 /************************************************************************/
-void f_co_getMsglength() {
+uint8_t f_co_getMsglength() {
+	t_co_msg_header* msgheader = ((t_co_msg_header*)f_co_MsgCache_append(co_byte));
+	
 	uint8_t msglength = CO_READ_HEADERSIZE + 1;
 	if(ISSET_BIT(msgheader->Info, 7)){
 		msglength += (msgheader->Info & 0x7f);
@@ -64,7 +65,7 @@ void f_co_getMsglength() {
 /************************************************************************/
 void f_co_resetReader() {
 	co_status = 0x00;
-	co_read_msglength = CO_MAXMESSAGEBUFFERSIZE;
+	co_read_msglength = 0xff;
 }
 
 /************************************************************************/

@@ -81,6 +81,8 @@ void f_co_init_waitmode()
 	
 	// co_byte wieder zuruecksetzen
 	co_byte = 0x01;
+	
+	f_co_resetReader();
 }
 
 // TMP function remove later used to add something to the debug

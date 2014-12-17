@@ -79,7 +79,7 @@ enum
 /**
  * Geschwindigkeit des Timers anpassen
  */
-#define CO_TIMERSPEED 3
+#define CO_TIMERSPEED 1
 
 /**
  * Pin wo gelesen wird einstellen.

@@ -107,7 +107,7 @@ void f_co_resetReader();
 /**
  * gibt die laenge der Nachricht an
  */
-void f_co_getMsglength();
+uint8_t f_co_getMsglength();
 
 /**
  * Verarbeitet Nachrichtinformationen im normalen applikations loop
