@@ -39,12 +39,24 @@ void f_co_processbyte(uint8_t byte)
 void f_co_processHeader() {
 	t_co_msg_header* msgheader = ((t_co_msg_header*)f_co_MsgCache_append(co_byte));
 	
-	co_read_msglength = CO_READ_HEADERSIZE + 1;
+	co_read_msglength = f_co_getMsglength();
+	/*CO_READ_HEADERSIZE + 1;
 	if(ISSET_BIT(msgheader->Info, 7)){
 		co_read_msglength += (msgheader->Info & 0x7f);
-	}
+	}*/
 	
 	SET_BIT(co_status, HEADERPROCESSED);
+}
+
+/************************************************************************/
+/* f_co_processHeader()                                                   */
+/************************************************************************/
+void f_co_getMsglength() {
+	uint8_t msglength = CO_READ_HEADERSIZE + 1;
+	if(ISSET_BIT(msgheader->Info, 7)){
+		msglength += (msgheader->Info & 0x7f);
+	}
+	return msglength;
 }
 
 /************************************************************************/
