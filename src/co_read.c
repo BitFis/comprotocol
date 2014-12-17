@@ -50,7 +50,7 @@ void f_co_read_update() {
 	}else if(co_MsgCache_position >= co_read_msglength){
 	//	SET_BIT(co_status, )
 	}
-	co_debug_var = co_status;
+	co_debug_var = co_MsgCache_position;
 }
 
 /************************************************************************/
