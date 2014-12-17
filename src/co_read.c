@@ -24,14 +24,14 @@
 /************************************************************************/
 void f_co_processbyte(bool byte)
 {
-	f_co_MsgCache_append(co_byte);
 }
 
 /************************************************************************/
 /* f_co_processHeader()                                                   */
 /************************************************************************/
 void f_co_processHeader() {
-	
+	SET_BIT(co_status, HEADERPROCESSED); 
+//	(<>*f_co_MsgCache_append(co_byte));
 }
 
 /************************************************************************/
@@ -43,7 +43,7 @@ void f_co_read_update() {
 	}else if(co_MsgCache_position >= co_read_msglength){
 	//	SET_BIT(co_status, )
 	}
-//	co_debug_var = co_status;
+	co_debug_var = co_status;
 }
 
 /************************************************************************/
