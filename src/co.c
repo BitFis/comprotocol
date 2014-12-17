@@ -25,7 +25,7 @@ volatile uint8_t co_status = 0x00;
 
 uint8_t checksum;
 volatile uint8_t bSending;
-volatile uint8_t sSendByte[255];
+volatile uint8_t sSendByte[CO_MAXMESSAGEBUFFERSIZE];
 volatile uint8_t cPointerSendByte;
 volatile uint8_t cPositionBit;
 volatile uint8_t cPaketGroesse;
@@ -177,8 +177,8 @@ ISR(TIMER1_OVF_vect)
 		else if(bSending == 2)
 		{
 			bSending = 1;
-			char sendC = sSendByte[cPointerSendByte];
-			sendC = cPositionBit & sendC;
+			char sendD = sSendByte[cPointerSendByte];
+			sendD = cPositionBit & sendD;
 			cPositionBit = cPositionBit >> 1;
 			//Prüfe ob Ende von Byte erreicht
 			if(cPositionBit == 0)
@@ -192,11 +192,12 @@ ISR(TIMER1_OVF_vect)
 				bSending = 0;
 			}
 			//Falls Bit != 0 ...
-			if(sendC != 0)
+			if(sendD != 0)
 			{
-				sendC = 1;
+				//Auf PIN 2 asugeben
+				sendD = 0b00000100;
 			}
-			PORTC = ~sendC;
+			PORTD = ~sendD;
 		}
 	}
 

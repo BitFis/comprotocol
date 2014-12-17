@@ -113,7 +113,7 @@ bool f_co_write_Controll(char p_cBitControll){
 
 void f_co_write_ProtocollHeader(char destination_id){
 	
-	DDRC = 0x01;
+	DDRD = 0x04;
 
 	checksum = 0;
 
