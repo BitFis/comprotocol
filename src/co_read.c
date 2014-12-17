@@ -35,12 +35,14 @@ void f_co_processbyte(char byte)
 void f_co_processHeader() {
 	t_co_msg_header* msgheader = ((t_co_msg_header*)f_co_MsgCache_append(co_byte));
 	
-	if(ISSET_BIT(msgheader->info, 7)){
+	if(ISSET_BIT(msgheader->Info, 7)){
 		co_read_msglength = CO_READ_HEADERSIZE + 1 + msgheader->Info & 0x7f;
+		// summieren headersize, checksumme und textlaenge
+	}else{
+		co_read_msglength = CO_READ_HEADERSIZE + 1; // summieren headersize und checksumme
 	}
 	
-	SET_BIT(co_status, HEADERPROCESSED); 
-//	((*)f_co_MsgCache_append(co_byte))->info;
+	SET_BIT(co_status, HEADERPROCESSED);
 }
 
 /************************************************************************/
