@@ -4,7 +4,7 @@
 * Dieses Dokument ist Teil von "comprotocol" *
 * *
 * Comprotocol ist eine frei zu nutzende Bibliothek. Die Bibliothek wird *
-* unter der MIT Lizens veröffentlicht. Jegliche Nutzung auf eigene Gefahr. *
+* unter der MIT Lizens verÃ¶ffentlicht. Jegliche Nutzung auf eigene Gefahr. *
 ****************************************************************************/
 /**
 * @file co_read.h
@@ -13,7 +13,7 @@
 * @brief Funktionen und Hilfsfunktionen zum Lesen einer Verbindung.
 *
 * Die hier vorhandenen Funktionen werden genutzt um eine Verbindung
-* gebgebenen Port abzuhoeren. Bit für Bit werden diese Informationen
+* gebgebenen Port abzuhoeren. Bit fÃ¼r Bit werden diese Informationen
 * nach einem gegebenen Tackt eingelesen und in auf Cache geschrieben.
 */
 
@@ -67,11 +67,16 @@ typedef struct {
 } t_co_msg_text;
 
 /**
- * Die Message struktur für ein gesendeter command
+ * Die Message struktur fÃ¼r ein gesendeter command
  */
 typedef struct {
 	uint8_t checksum; /** < Checksumme der gesendeten message  */
 } t_co_msg_command;
+
+/**
+ * Enthaelt die laenge der Nachricht, die gerade gelesen wird.
+ */
+extern char co_read_msglength = CO_MAXMESSAGEBUFFERSIZE;
 
 /****************************************************************************
 * Funktionen
