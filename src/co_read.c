@@ -28,7 +28,7 @@ uint8_t co_read_msglength = CO_MAXMESSAGEBUFFERSIZE;
 /************************************************************************/
 /* f_co_processbyte(byte)                                               */
 /************************************************************************/
-void f_co_processbyte(char byte)
+void f_co_processbyte(bool byte)
 {
 	f_co_MsgCache_append(byte);
 }
