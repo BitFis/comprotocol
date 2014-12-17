@@ -127,10 +127,15 @@ extern uint8_t co_debug_var;
 ****************************************************************************/
 
 /**
- * gedrÃ¼ckte Taste senden
- * @param gedrÃ¼ckte Taste als Zahl von 0 - 15.
+ * gedrückte Taste senden
+ * @param gedrückte Taste als Zahl von 0 - 15.
  */
 void f_co_SendTaste(char p_sTaste);
+
+/**
+ * Bei jedem 2. Interrupt ein Bit senden
+ */
+void f_co_Send();
 
 /** NOT IMPLEMENTED */
 void f_co_inputchange();

@@ -143,6 +143,11 @@ ISR(INT0_vect)
 
 ISR(TIMER1_OVF_vect)
 {	
+	/* Interrupt Aktion alle
+	(1000000/1024)/256 Hz = 3.814697 Hz
+	bzw.
+	1/3.814697 s = 262.144 ms  
+	*/
 	if(!WRITE)
 	{			
 		if(ISCLEAR_BIT(co_status, DELAY))
@@ -163,11 +168,13 @@ ISR(TIMER1_OVF_vect)
 	}
 	else
 	{	
-		/* Interrupt Aktion alle
-		(1000000/1024)/256 Hz = 3.814697 Hz
-		bzw.
-		1/3.814697 s = 262.144 ms  
-		*/
+		f_co_Send();
+	}
+
+}
+
+void f_co_Send()
+{
 		//Nur bei jedem zweiten mal senden
 		if(bSending == 1)
 		{
@@ -198,11 +205,7 @@ ISR(TIMER1_OVF_vect)
 			}
 			PORTD = ~sendD;
 		}
-	}
-
 }
-
-
 
 /*
 Der Overflow Interrupt Handler
