@@ -4,7 +4,7 @@
 * Dieses Dokument ist Teil von "comprotocol" *
 * *
 * Comprotocol ist eine frei zu nutzende Bibliothek. Die Bibliothek wird *
-* unter der MIT Lizens veröffentlicht. Jegliche Nutzung auf eigene Gefahr. *
+* unter der MIT Lizens verÃ¶ffentlicht. Jegliche Nutzung auf eigene Gefahr. *
 ****************************************************************************/
 /**
 * @file co_document.h
@@ -57,7 +57,7 @@
 enum 
 {
 	READING, /**< Information ob zurzeit geschrieben wird */
-	PROCESS, /**< Byte fertig gelesen. */
+	HEADERPROCESSED, /**< Byte fertig gelesen. */
 	LASTREADBIT, /**< Zuletzt gelesenes Bit */
 	DELAY, /**< Aussetzen um jeden zweiten "clock" lesen */
 	MESSAGEREADING, /**< Message lesen */
@@ -127,8 +127,8 @@ extern uint8_t co_debug_var;
 ****************************************************************************/
 
 /**
- * gedrückte Taste senden
- * @param gedrückte Taste als Zahl von 0 - 15.
+ * gedrÃ¼ckte Taste senden
+ * @param gedrÃ¼ckte Taste als Zahl von 0 - 15.
  */
 void f_co_SendTaste(char p_sTaste);
 
