@@ -96,6 +96,8 @@ void f_co_processbyte(uint8_t byte);
 
 void f_co_processHeader();
 
+void f_co_resetReader();
+
 void f_co_checkValid(uint8_t byte);
 
 void f_co_read_update();
