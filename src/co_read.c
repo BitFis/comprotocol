@@ -40,10 +40,10 @@ void f_co_processHeader() {
 void f_co_read_update() {
 	if(co_MsgCache_position >=  CO_READ_HEADERSIZE ){
 		co_debug_var = 0xff;
-	}else if(){
+	}/*else if(){
 		SET_BIT(co_status, )
-	}
-	co_debug_var = co_status;
+	}*/
+//	co_debug_var = co_status;
 }
 
 /************************************************************************/
