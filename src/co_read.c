@@ -76,7 +76,7 @@ void f_co_read_update() {
 			f_co_processMsg();
 		
 	}
-	
+	// TMP
 	co_debug_var = co_status;
 }
 
