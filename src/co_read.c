@@ -24,8 +24,9 @@ uint8_t co_read_msglength = CO_MAXMESSAGEBUFFERSIZE;
 /************************************************************************/
 /* f_co_processbyte(byte)                                               */
 /************************************************************************/
-void f_co_processbyte(bool byte)
+void f_co_processbyte(char byte)
 {
+	f_co_MsgCache_append(byte);
 }
 
 /************************************************************************/
@@ -53,7 +54,7 @@ void f_co_read_update() {
 	}else if(co_MsgCache_position >= co_read_msglength){
 	//	SET_BIT(co_status, )
 	}
-	co_debug_var = co_MsgCache_position;
+	co_debug_var = co_status;
 }
 
 /************************************************************************/
