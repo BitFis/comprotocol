@@ -155,7 +155,7 @@ ISR(TIMER1_OVF_vect)
 		}
 		
 		TOGGLE_BIT(co_status, DELAY);
-		CLEAR_BIT(co_status, PROCESS);
+	//	CLEAR_BIT(co_status, PROCESS);
 		
 	//	co_status = ( (((~PIND) & (1<<CO_PINREADING)) >> CO_PINREADING) << LASTREADBIT);
 	//	SET_BIT(co_status, PROCESS);
