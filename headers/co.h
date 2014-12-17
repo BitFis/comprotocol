@@ -132,13 +132,6 @@ extern uint8_t co_debug_var;
  */
 void f_co_SendTaste(char p_sTaste);
 
-/**
- * Byte zu String konvertieren
- * @param Byte welches konvertiert werden soll
- * @param Pointer in welche das Resultat geschrieben wird
- */
-void f_co_ConvertByteToStr(char p_cByte, char *sResult);
-
 /** NOT IMPLEMENTED */
 void f_co_inputchange();
 

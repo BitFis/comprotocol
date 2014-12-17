@@ -78,7 +78,7 @@
  * Definiert den maximalen Speicher in Byte, den der Messagebuffer
  * ausnutzen darf.
  */
-#define CO_MAXMESSAGEBUFFERSIZE 20
+#define CO_MAXMESSAGEBUFFERSIZE 128
 
 /****************************************************************************
 * Enumirationen & Strukturen

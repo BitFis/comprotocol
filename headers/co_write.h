@@ -37,7 +37,7 @@ extern uint8_t tmp;
 
 extern uint8_t checksum;
 volatile uint8_t bSending;
-volatile uint8_t sSendByte[255];
+volatile uint8_t sSendByte[CO_MAXMESSAGEBUFFERSIZE];
 volatile uint8_t cPointerSendByte;
 volatile uint8_t cPositionBit;
 volatile uint8_t cPaketGroesse;

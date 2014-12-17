@@ -1,4 +1,4 @@
-test
+﻿test
 # Protokoll Beschreibung (comprotocol)
 ===========
 
@@ -103,21 +103,17 @@ Alle Struktogramme:
 
 ![f_co_initializeOverflowInterrupt](./images/strg/f_co_initializeOverlowInterrupt.PNG "f_co_initializeOverflowInterrupt")
 
-### f_co_send
+### f_co_write_Command
 
-![f_co_send](./images/strg/f_co_send.PNG "f_co_send")
+![f_co_send](./images/strg/f_co_write_Command.PNG "f_co_write_Command")
 
-### f_co_sendText
+### f_co_write_Text
 
-![f_co_sendText](./images/strg/f_co_sendText.PNG "f_co_sendText")
+![f_co_sendText](./images/strg/f_co_write_Text.PNG "f_co_write_Text")
 
-### f_co_sendByte
+### f_co_write_Byte
 
-![f_co_sendByte](./images/strg/f_co_sendByte.PNG "f_co_sendByte")
-
-### f_co_sendBit
-
-![f_co_sendBit](./images/strg/f_co_sendBit.PNG "f_co_sendBit")
+![f_co_sendByte](./images/strg/f_co_write_Byte.PNG "f_co_write_Byte")
 
 ### f_co_init_waitmode
 

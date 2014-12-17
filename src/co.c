@@ -119,7 +119,7 @@ void f_co_SendTaste(char p_sTaste)
 			f_co_LCD_RAM(16);
 			f_co_LCD_INT(cProzentEnde);
 			f_co_LCD_CHR('%');
-			f_co_LCD_RAM(8 + Count);
+			f_co_LCD_RAM(9 + Count);
 		}
 		_delay_ms(2000);
 		
@@ -129,17 +129,6 @@ void f_co_SendTaste(char p_sTaste)
 	}
 	f_co_LCD_CLR();
 	f_co_LCD_STR("finish");
-}
-
-
-void f_co_ConvertByteToStr(char p_cByte, char *sResult)
-{
-	char cPosition;
-	
-	for(cPosition = 0; cPosition < 8; cPosition++)
-	{
-		sResult[ 7 - cPosition] = ((p_cByte & (1 << cPosition)) >> cPosition) + '0';
-	}
 }
 
 //////////////////////////////////////////////////////////////////////////
