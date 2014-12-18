@@ -7,7 +7,7 @@
 * unter der MIT Lizens veröffentlicht. Jegliche Nutzung auf eigene Gefahr. *
 ****************************************************************************/
 /**
-* @file co_read.c
+* @file co_write.c
 * @author Emanuel Foster, Lucien Zuercher
 * @date 10. Dez. 2014
 * @brief Funktionen und Hilfsfunktionen zum schreiben einer Verbindung.

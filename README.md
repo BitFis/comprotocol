@@ -1,10 +1,7 @@
-﻿test
-# Protokoll Beschreibung (comprotocol)
+﻿# Protokoll Beschreibung (comprotocol)
 ===========
 
 Ein sehr einfach gehaltenes Kommunikationsprotokoll. Das Protokoll wird für schulische Zwecke genutzt und dient zum lernen.
-
-code api
 
 ## Protokoll Aufbau
 

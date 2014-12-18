@@ -7,7 +7,7 @@
 * unter der MIT Lizens veröffentlicht. Jegliche Nutzung auf eigene Gefahr. *
 ****************************************************************************/
 /**
-* @file co_isr.h
+* @file co_isr.c
 * @author Emanuel Foster, Lucien Zuercher
 * @date 15. Sep. 2014
 * @brief Enthaelt alle "Interrupt" Funktionen.

@@ -7,7 +7,7 @@
 * unter der MIT Lizens veröffentlicht. Jegliche Nutzung auf eigene Gefahr. *
 ****************************************************************************/
 /**
-* @file co_document.h
+* @file co_config.h
 * @author Emanuel Foster, Lucien Zuercher
 * @date 1. Jan. 2014
 * @brief Konstanten und Globale Veriablen fuer Einstellungen.

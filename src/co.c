@@ -5,7 +5,7 @@
  ****************************************************************************/
 
 /**
- * @file co.h
+ * @file co.c
  * @author Emanuel Foster / Lucien Zürcher
  * @date 8.8.2014
  * @brief Funktionslibrary für das comprotocol
