@@ -99,89 +99,89 @@ Alle Struktogramme:
 ---
 co_io - funktionen
 
-### void f_co_SendTaste
+### f_co_SendTaste
 
 ![f_co_SendTaste](./images/strg/f_co_SendTaste.PNG "f_co_SendTaste")
 
-### void f_co_SendText
+### f_co_SendText
 
 ![f_co_SendText](./images/strg/f_co_SendText.PNG "f_co_SendText")
 
-### void f_co_InitProtocol
+### f_co_InitProtocol
 
 ![f_co_InitProtocol](./images/strg/f_co_InitProtocol.PNG "f_co_InitProtocol")
 
-### uint8_t* f_co_GetMessage
+### f_co_GetMessage
 
 ![f_co_GetMessage](./images/strg/f_co_GetMessage.PNG "f_co_GetMessage")
 
-### uint8_t f_co_GetCommand
+### f_co_GetCommand
 
 ![f_co_GetCommand](./images/strg/f_co_GetCommand.PNG "f_co_GetCommand")
 
-### uint8_t f_co_GetKey
+### f_co_GetKey
 
 ![f_co_GetKey](./images/strg/f_co_GetKey.PNG "f_co_GetKey")
 
-### void f_co_update
+### f_co_update
 
 ![f_co_update](./images/strg/f_co_update.PNG "f_co_update")
 
 ---
 co_read
 
-### void f_co_init_waitmode
+### f_co_init_waitmode
 
 ![f_co_init_waitmode](./images/strg/f_co_init_waitmode.PNG "f_co_init_waitmode")
 
-### void f_co_readbit
+### f_co_readbit
 
 ![f_co_readbit](./images/strg/f_co_readbit.PNG "f_co_readbit")
 
-### void f_co_processbyte
+### f_co_processbyte
 
 ![f_co_processbyte](./images/strg/f_co_processbyte.PNG "f_co_processbyte")
 
-### void void f_co_processMsg
+### f_co_processMsg
 
 ![f_co_processMsg](./images/strg/f_co_processMsg.PNG "f_co_processMsg")
 
-### void f_co_processHeader
+### f_co_processHeader
 
 ![f_co_processHeader](./images/strg/f_co_processHeader.PNG "f_co_processHeader")
 
-### void f_co_resetReader
+### f_co_resetReader
 
 ![f_co_resetReader](./images/strg/f_co_resetReader.PNG "f_co_resetReader")
 
-### uint8_t f_co_getMsglength
+### f_co_getMsglength
 
 ![f_co_getMsglength](./images/strg/f_co_getMsglength.PNG "f_co_getMsglength")
 
 --
 co_write - funktionen
 
-### void f_co_write_Text
+### f_co_write_Text
 
 ![f_co_write_Text](./images/strg/f_co_write_Text.PNG "f_co_write_Text")
 
-### void f_co_write_Send
+### f_co_write_Send
 
 ![f_co_write_Send](./images/strg/f_co_write_Send.PNG "f_co_write_Send")
 
-### void f_co_write_Command
+### f_co_write_Command
 
 ![f_co_write_Command](./images/strg/f_co_write_Command.PNG "f_co_write_Command")
 
-### void f_co_write_ProtocollHeader
+### f_co_write_ProtocollHeader
 
 ![f_co_write_ProtocollHeader](./images/strg/f_co_write_ProtocollHeader.PNG "f_co_write_ProtocollHeader")
 
-### bool f_co_write_Byte
+### f_co_write_Byte
 
 ![f_co_write_Byte](./images/strg/f_co_write_Byte.PNG "f_co_write_Byte")
 
-### bool f_co_write_Controll
+### f_co_write_Controll
 
 ![f_co_write_Controll](./images/strg/f_co_write_Controll.PNG "f_co_write_Controll")
 
