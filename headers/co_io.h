@@ -41,13 +41,21 @@
 ****************************************************************************/
 
 /**
+ * gedrückte Taste senden
+ * @param gedrückte Taste als Zahl von 0 - 15.
+ */
+void f_co_SendTaste(char p_sTaste);
+
+/**
+ * Sendet eine Charakterreihe, bis \0
+ * @param text Pointer auf den ersten Charakter des zu sendenden Textes (max 255 Bytes)
+ */
+void f_co_SendText(char *text);
+
+/**
  * Initialisieren des Protokolles
  */
 void f_co_InitProtocol();
-
-/** Send Funktionen **/
-
-/** Lese Funktionen **/
 
 /**
  * Eingelesene Message holen
@@ -55,12 +63,9 @@ void f_co_InitProtocol();
  */
 uint8_t* f_co_GetMessage();
 
-/** NOT IMPLEMENTED */
-bool f_co_MessageRead();
-
 /**
  * Gibt den eingelesenen Befehl zurueck
- * @return Ungefiterter Befehl
+ * @return Ungefilterter Befehl
  */
 uint8_t f_co_GetCommand();
 

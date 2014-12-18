@@ -13,8 +13,9 @@
 * @brief Funktionen und Hilfsfunktionen zum Lesen einer Verbindung.
 *
 * Die hier vorhandenen Funktionen werden genutzt um eine Verbindung
-* gebgebenen Port abzuhoeren. Bit für Bit werden diese Informationen
-* nach einem gegebenen Tackt eingelesen und in auf Cache geschrieben.
+* auf einem gebgebenen Port abzuhoeren. Byte für Byte werden diese 
+* Informationen nach einem gegebenen Tackt eingelesen und in ein Cache 
+* geschrieben.
 */
 
 #ifndef _CO_READ_H
@@ -27,9 +28,15 @@
 # include "co.h"
 
 /****************************************************************************
-* Makros
+* Konstanten
 ****************************************************************************/
 
+/**
+ * Pin wo gelesen wird einstellen.
+ * ! ACHTUNG !
+ * nur pin 2/3 kann ein "listening handler" hinzugefuegt werden.
+ */
+#define CO_PINREADING 2
 
 /****************************************************************************
 * Enumirationen & Strukturen
@@ -83,6 +90,11 @@ extern uint8_t co_read_msglength;
 ****************************************************************************/
 
 /**
+ * initialisiert den wartemodus. Heisst es wird auf eine Aenderung gewartet auf PIN 2 des PORTS B
+ */
+void f_co_init_waitmode();
+
+/**
  * bit lesen
  * @param byte byte eingelesen
  */
@@ -93,6 +105,11 @@ void f_co_readbit(uint8_t byte);
  * @param byte Das eingelesene byte
  */
 void f_co_processbyte(uint8_t byte);
+
+/**
+ * verarbeitet die gelesense Nachricht
+ */
+void void f_co_processMsg();
 
 /**
  * Veratbeitet den Nachrichten-Header und setzt laenge des Protokolls 

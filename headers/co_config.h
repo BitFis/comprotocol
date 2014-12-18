@@ -13,7 +13,7 @@
 * @brief Konstanten und Globale Veriablen fuer Einstellungen.
 *
 * Dieses Dokument enthaelt verschiedene Konstanten und globale Variablen,
-* die frei zum Einstellen sind.
+* die frei fuer den Nutzer einstellbar sind.
 */
 #ifndef _CO_DOCUMENT_H
 # define _CO_DOCUMENT_H

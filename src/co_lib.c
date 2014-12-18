@@ -21,19 +21,23 @@
 #include "../headers/co_lib.h"
 
 /************************************************************************/
+/* Variablen															*/
+/************************************************************************/
 
 uint8_t* co_MsgCache_cache;
 uint8_t co_MsgCache_position;
 
 /************************************************************************/
-
+/* f_co_MsgCache_release()												*/
+/************************************************************************/
 void f_co_MsgCache_release()
 {
 	free(co_MsgCache_cache);
 }
 
 /************************************************************************/
-
+/* f_co_MsgCache_init()													*/
+/************************************************************************/
 void f_co_MsgCache_init()
 {
 	co_MsgCache_cache = malloc(CO_MAXMESSAGEBUFFERSIZE * sizeof(uint8_t));
@@ -41,41 +45,43 @@ void f_co_MsgCache_init()
 }
 
 /************************************************************************/
-
+/* f_co_MsgCache_append(value)											*/
+/************************************************************************/
 uint8_t f_co_MsgCache_append(uint8_t value)
 {
 	if(co_MsgCache_position < CO_MAXMESSAGEBUFFERSIZE)
 		co_MsgCache_cache[co_MsgCache_position++] = value;
-		
-	// TMP
-	//co_debug_var = value;
-		
+				
 	return co_MsgCache_position;
 }
 
 /************************************************************************/
-
+/* f_co_MsgCache_setPosition(position)									*/
+/************************************************************************/
 void f_co_MsgCache_setPosition(uint8_t position)
 {
 	co_MsgCache_position = position < CO_MAXMESSAGEBUFFERSIZE ? position : CO_MAXMESSAGEBUFFERSIZE - 1;
 }
 
 /************************************************************************/
-
-void f_co_MsgCache_getPosition(uint8_t position)
+/* f_co_MsgCache_getPosition(position)									*/
+/************************************************************************/
+void f_co_MsgCache_getPosition()
 {
 	return co_MsgCache_position;
 }
 
 /************************************************************************/
-
+/* f_co_MsgCache_reset()												*/
+/************************************************************************/
 void f_co_MsgCache_reset()
 {
 	co_MsgCache_position = 0;
 }
 
 /************************************************************************/
-
+/* f_co_MsgCache_getStart()												*/
+/************************************************************************/
 uint8_t* f_co_MsgCache_getStart()
 {
 	return co_MsgCache_cache;

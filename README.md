@@ -88,45 +88,150 @@ Wird benötigt um die erhaltenen bytes zu kontrollieren. Die checksumme ermögli
 
 Die Checksumme wird erstellt indem man alle zuvor gesendeten bytes(inklusiv erstem Byte '10101010') XOR miteinander verknüpft.
 
-## Structure chart
+## Structure chart & Struktogramme
 
 Das *structure chart* aller Funktionen:
 
 ![alt text](./images/Comprotocol_structurechart.png "structure chart")
 
-
-## Funktionen Struktugram
-
 Alle Struktogramme:
 
-### f_co_initializeOverflowInterrupt
+---
+co_io - funktionen
 
-![f_co_initializeOverflowInterrupt](./images/strg/f_co_initializeOverlowInterrupt.PNG "f_co_initializeOverflowInterrupt")
+### void f_co_SendTaste
 
-### f_co_write_Command
+![f_co_SendTaste](./images/strg/f_co_SendTaste.PNG "f_co_SendTaste")
 
-![f_co_send](./images/strg/f_co_write_Command.PNG "f_co_write_Command")
+### void f_co_SendText
 
-### f_co_write_Text
+![f_co_SendText](./images/strg/f_co_SendText.PNG "f_co_SendText")
 
-![f_co_sendText](./images/strg/f_co_write_Text.PNG "f_co_write_Text")
+### void f_co_InitProtocol
 
-### f_co_write_Byte
+![f_co_InitProtocol](./images/strg/f_co_InitProtocol.PNG "f_co_InitProtocol")
 
-![f_co_sendByte](./images/strg/f_co_write_Byte.PNG "f_co_write_Byte")
+### uint8_t* f_co_GetMessage
 
-### f_co_init_waitmode
+![f_co_GetMessage](./images/strg/f_co_GetMessage.PNG "f_co_GetMessage")
+
+### uint8_t f_co_GetCommand
+
+![f_co_GetCommand](./images/strg/f_co_GetCommand.PNG "f_co_GetCommand")
+
+### uint8_t f_co_GetKey
+
+![f_co_GetKey](./images/strg/f_co_GetKey.PNG "f_co_GetKey")
+
+### void f_co_update
+
+![f_co_update](./images/strg/f_co_update.PNG "f_co_update")
+
+---
+co_read
+
+### void f_co_init_waitmode
 
 ![f_co_init_waitmode](./images/strg/f_co_init_waitmode.PNG "f_co_init_waitmode")
 
-### f_co_update
+### void f_co_readbit
 
-![f_co_init_waitmode](./images/strg/f_co_update.PNG "f_co_update")
+![f_co_readbit](./images/strg/f_co_readbit.PNG "f_co_readbit")
 
-### f_co_processbyte
+### void f_co_processbyte
 
 ![f_co_processbyte](./images/strg/f_co_processbyte.PNG "f_co_processbyte")
 
+### void void f_co_processMsg
+
+![f_co_processMsg](./images/strg/f_co_processMsg.PNG "f_co_processMsg")
+
+### void f_co_processHeader
+
+![f_co_processHeader](./images/strg/f_co_processHeader.PNG "f_co_processHeader")
+
+### void f_co_resetReader
+
+![f_co_resetReader](./images/strg/f_co_resetReader.PNG "f_co_resetReader")
+
+### uint8_t f_co_getMsglength
+
+![f_co_getMsglength](./images/strg/f_co_getMsglength.PNG "f_co_getMsglength")
+
+--
+co_write - funktionen
+
+### void f_co_write_Text
+
+![f_co_write_Text](./images/strg/f_co_write_Text.PNG "f_co_write_Text")
+
+### void f_co_write_Send
+
+![f_co_write_Send](./images/strg/f_co_write_Send.PNG "f_co_write_Send")
+
+### void f_co_write_Command
+
+![f_co_write_Command](./images/strg/f_co_write_Command.PNG "f_co_write_Command")
+
+### void f_co_write_ProtocollHeader
+
+![f_co_write_ProtocollHeader](./images/strg/f_co_write_ProtocollHeader.PNG "f_co_write_ProtocollHeader")
+
+### bool f_co_write_Byte
+
+![f_co_write_Byte](./images/strg/f_co_write_Byte.PNG "f_co_write_Byte")
+
+### bool f_co_write_Controll
+
+![f_co_write_Controll](./images/strg/f_co_write_Controll.PNG "f_co_write_Controll")
+
+---
+co_isr
+
+
+### f_co_initializeOverflowInterrupt
+
+![f_co_initializeOverflowInterrupt](./images/strg/f_co_initializeOverflowInterrupt.PNG "f_co_initializeOverflowInterrupt")
+
+### f_co_isr_timer1OvfVect
+
+![f_co_isr_timer1OvfVect](./images/strg/f_co_isr_timer1OvfVect.PNG "f_co_isr_timer1OvfVect")
+
+### f_co_isr_int0Vect
+
+![f_co_isr_int0Vect](./images/strg/f_co_isr_int0Vect.PNG "f_co_isr_int0Vect")
+
+
+---
+co_lib - funktionen
+
+### f_co_MsgCache_release
+
+![f_co_MsgCache_release](./images/strg/f_co_MsgCache_release.PNG "f_co_MsgCache_release")
+
+### f_co_MsgCache_init
+
+![f_co_MsgCache_init](./images/strg/f_co_MsgCache_init.PNG "f_co_MsgCache_init")
+
+### f_co_MsgCache_append
+
+![f_co_MsgCache_append](./images/strg/f_co_MsgCache_append.PNG "f_co_MsgCache_append")
+
+### f_co_MsgCache_setPosition
+
+![f_co_MsgCache_setPosition](./images/strg/f_co_MsgCache_setPosition.PNG "f_co_MsgCache_setPosition")
+
+### f_co_MsgCache_getPosition
+
+![f_co_MsgCache_getPosition](./images/strg/f_co_MsgCache_getPosition.PNG "f_co_MsgCache_getPosition")
+
+### f_co_MsgCache_reset
+
+![f_co_MsgCache_reset](./images/strg/f_co_MsgCache_reset.PNG "f_co_MsgCache_reset")
+
+### f_co_MsgCache_getStart
+
+![f_co_MsgCache_getStart](./images/strg/f_co_MsgCache_getStart.PNG "f_co_MsgCache_getStart")
 
 ## API
 

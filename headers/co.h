@@ -13,7 +13,7 @@
 * @brief Laedt alle benoetigten Abhaengigkeiten.
 *
 * Laedt alle benoetigten Abhaengigkeiten. Dazu gehoeren config, lib, 
-* read, write
+* read, write, io, isr
 * 
 */
 
@@ -72,23 +72,6 @@ enum
 /* Programmierer Einstellungen */
 
 /**
- * Timer typ einstellen
- */
-#define CO_USEDTIMER TOIE1
-
-/**
- * Geschwindigkeit des Timers anpassen
- */
-#define CO_TIMERSPEED 1
-
-/**
- * Pin wo gelesen wird einstellen.
- * ! ACHTUNG !
- * nur pin 2/3 kann ein "listening handler" hinzugefuegt werden.
- */
-#define CO_PINREADING 2
-
-/**
  * Identifikationsbyte
  */
 #define CO_MESSAGEIDENTIFIER 0b10101010
@@ -110,14 +93,12 @@ volatile extern uint8_t co_status;
 /** Buffer Variablen **/
 
 /**
- * contains current position in message buffer
+ * Temporaere Variable, kann ueberall benutzt werden
  */
-extern uint8_t *co_cachpos;
-
-extern uint8_t co_curinput; // current input remove later
+extern uint8_t tmp;
 
 /** 
- * Temporaere Variable fuer Release entfernen
+ * Temporaere Variable fuer Release entfernen - debug fuer pins
  */
 extern uint8_t co_debug_var;
 
@@ -125,30 +106,6 @@ extern uint8_t co_debug_var;
 /****************************************************************************
 * Funktionen
 ****************************************************************************/
-
-/**
- * gedrückte Taste senden
- * @param gedrückte Taste als Zahl von 0 - 15.
- */
-void f_co_SendTaste(char p_sTaste);
-
-/**
- * Bei jedem 2. Interrupt ein Bit senden
- */
-void f_co_Send();
-
-/** NOT IMPLEMENTED */
-void f_co_inputchange();
-
-/**
- * initialisiert die Interrupt funktion, die fuer den lese und schreibe Zyklus genutzt wird.
- */
-void f_co_initializeOverflowInterrupt();
-
-/**
- * initialisiert den wartemodus. Heisst es wird auf eine Aenderung gewartet auf PIN 2 des PORTS B
- */
-void f_co_init_waitmode();
 
 #endif /* CO_H_ */
 

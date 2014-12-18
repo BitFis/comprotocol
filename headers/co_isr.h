@@ -10,13 +10,9 @@
 * @file co_isr.h
 * @author Emanuel Foster, Lucien Zuercher
 * @date 15. Sep. 2014
-* @brief Enthaelt alle "Interrupt" Funktionen.
+* @brief Setzt und enthaelt ISR funktionen.
 *
-* Here typically goes a more extensive explanation of what the header
-* defines. Doxygens tags are words preceeded by either a backslash @\
-* or by an at symbol @@.
-* @see http://www.stack.nl/~dimitri/doxygen/docblocks.html
-* @see http://www.stack.nl/~dimitri/doxygen/commands.html
+* Hier sind die ISR funktionen definiert und werden gesetzt.
 */
 #ifndef _CO_ISR_H
 # define _CO_ISR_H
@@ -25,12 +21,61 @@
 * Includes
 ****************************************************************************/
 
+#include "../headers/co.h"
+
+/****************************************************************************
+* Konstanten
+****************************************************************************/
+
+/**
+ * Timer typ einstellen
+ */
+#define CO_USEDTIMER TOIE1
+
+/**
+ * Geschwindigkeit des Timers anpassen
+ */
+#define CO_TIMERSPEED 1
 
 /****************************************************************************
 * Funktionen
 ****************************************************************************/
 
+/**
+ * initialisiert die Interrupt funktion, die fuer den lese und schreibe Zyklus genutzt wird.
+ */
+void f_co_initializeOverflowInterrupt();
 
+/**
+ * Timer1 Funktion, sendet im sende Mod das Byte oder
+ * liest im empfang Mode die gesendeten Bytes
+ */
+void f_co_isr_timer1OvfVect();
+
+/**
+ * Interrupt bei empfangen einer aenderung auf dem gesetzten Empfangsport
+ * genutzt um synchrones Lesen und schreiben zu ermöglichen. Synchronisieren
+ * mit den Verbundenen Controller.
+ */
+void f_co_isr_int0Vect();
+
+/****************************************************************************
+* ISR
+****************************************************************************/
+
+// ISR used to catch message
+ISR(INT0_vect)
+{
+	f_co_isr_int0Vect();
+}
+
+/**
+ * Haupttimer gesetzt zum effizient senden und empfangen der Nachrichten
+ */
+ISR(TIMER1_OVF_vect)
+{	
+	f_co_isr_timer1OvfVect();
+}
 
 #endif /* _CO_ISR_H */
 

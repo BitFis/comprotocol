@@ -31,15 +31,33 @@
 ****************************************************************************/
 
 /**
- * Temporary Variable can be used everywhere
+ * genutzt fuer die checksumme
  */
-extern uint8_t tmp;
-
 extern uint8_t checksum;
+
+/**
+ * enthealt das zud endende byte
+ */
 volatile uint8_t bSending;
+
+/**
+ * Buffer fuer die Nachricht, die uebertragen wird
+ */
 volatile uint8_t sSendByte[CO_MAXMESSAGEBUFFERSIZE];
+
+/**
+ * Zeigt auf das zu sendende Byte
+ */
 volatile uint8_t cPointerSendByte;
+
+/**
+ * Enthaelt die Position des derzeitigen buffers
+ */
 volatile uint8_t cPositionBit;
+
+/**
+ * groesse des packetes
+ */
 volatile uint8_t cPaketGroesse;
 
 /****************************************************************************
@@ -53,32 +71,37 @@ volatile uint8_t cPaketGroesse;
 
 /**
  * Sendet einen Text
- * @param Zu sendender Text
+ * @param p_sText Zu sendender Text
  */
 void f_co_write_Text(char* p_sText);
 
 /**
+ * Bei jedem 2. Interrupt ein Bit senden
+ */
+void f_co_write_Send();
+
+/**
  * Sendet einen Command
- * @param Zu sendender Command
+ * @param p_cCommand Zu sendender Command
  */
 void f_co_write_Command(unsigned char p_cCommand);
 
 /**
  * Sendet den Header einer neuen übetragung: start-byte, destination-id, source-id
- * @param Destioation-ID
+ * @param destination_id Destioation-ID
  */
 void f_co_write_ProtocollHeader(char destination_id);
 
 /**
  * Sendet ein Byte
- * @param Zu sendendes Byte
+ * @param p_cByte Zu sendendes Byte
  * @return Wurde Byte ohne Fehler gesendet 0 = Fehler, 1 = Kein Fehler
  */
 bool f_co_write_Byte(char p_cByte);
 
 /**
  * Kontrolliert ob das gesendete Bit ohne Kollision gesendet wurde
- * @param Gesendetes Bit welche Kontrolliert werden soll
+ * @param p_cBitControll Gesendetes Bit welche Kontrolliert werden soll
  * @return Wurde Byte ohne Fehler gesendet 0 = Fehler, 1 = Kein Fehler
  */
 bool f_co_write_Controll(char p_cBitControll);

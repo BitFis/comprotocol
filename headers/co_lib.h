@@ -27,7 +27,6 @@
 #include <inttypes.h>
 
 /** Internal **/
-//#include "co.h"
 
 /****************************************************************************
 * Makros
@@ -41,6 +40,7 @@
  * @param bit Die nummer des bits (0-7)
  */
 #define SET_BIT(var, bit) ((var) |= (1 << bit))
+
 /**
  * setzt das bit auf 0
  * @param var Byte bei dem der Wert gesetzt wird
@@ -143,6 +143,12 @@ uint8_t f_co_MsgCache_append(uint8_t value);
  * @param position Neue Position des Zeigers
  */
 void f_co_MsgCache_setPosition(uint8_t position);
+
+/**
+ * Auslesen der derzeitg gelsenen Position
+ * @return derzeitige Position des Buffers 
+ */
+void f_co_MsgCache_getPosition();
 
 /**
  * Zeiger auf den Start setzten

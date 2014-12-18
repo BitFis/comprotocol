@@ -17,8 +17,13 @@
 * nach einem gegebenen Tackt geschrieben.
 */
 
+/************************************************************************/
+
 #include "../headers/co.h"
 
+/************************************************************************/
+/* f_co_write_Text(p_sText)                                             */
+/************************************************************************/
 void f_co_write_Text(char* p_sText){
 	cPointerSendByte = 0;
 	
@@ -55,6 +60,46 @@ void f_co_write_Text(char* p_sText){
 	}
 }
 
+/************************************************************************/
+/* f_co_write_Send()													*/
+/************************************************************************/
+void f_co_write_Send()
+{
+		//Nur bei jedem zweiten mal senden
+		if(bSending == 1)
+		{
+			bSending = 2;
+		}
+		else if(bSending == 2)
+		{
+			bSending = 1;
+			char sendD = sSendByte[cPointerSendByte];
+			sendD = cPositionBit & sendD;
+			cPositionBit = cPositionBit >> 1;
+			//Prüfe ob Ende von Byte erreicht
+			if(cPositionBit == 0)
+			{
+				cPointerSendByte++;
+				cPositionBit = 0b10000000;
+			}
+			//Prüfe ob Ende erreicht
+			if(cPointerSendByte == cPaketGroesse)
+			{
+				bSending = 0;
+			}
+			//Falls Bit != 0 ...
+			if(sendD != 0)
+			{
+				//Auf PIN 2 asugeben
+				sendD = 0b00000100;
+			}
+			PORTD = ~sendD;
+		}
+}
+
+/************************************************************************/
+/* f_co_write_Command(p_cCommand)                	                	*/
+/************************************************************************/
 void f_co_write_Command(unsigned char p_cCommand){
 	cPointerSendByte = 0;
 	
@@ -78,6 +123,9 @@ void f_co_write_Command(unsigned char p_cCommand){
 	}
 }
 
+/************************************************************************/
+/* f_co_write_Byte(p_cByte)                                	            */
+/************************************************************************/
 bool f_co_write_Byte(char p_cByte){	
 	//Checksum XOR Verknüpfen
 	checksum ^= p_cByte;
@@ -88,6 +136,9 @@ bool f_co_write_Byte(char p_cByte){
 	return true;
 }
 
+/************************************************************************/
+/* f_co_write_Controll(p_cBitControll)                     	            */
+/************************************************************************/
 bool f_co_write_Controll(char p_cBitControll){
 	//Bit einlesen
 	DDRA = 0xFE;
@@ -111,6 +162,9 @@ bool f_co_write_Controll(char p_cBitControll){
 	}
 }
 
+/************************************************************************/
+/* f_co_write_ProtocollHeader(destination_id)                     	    */
+/************************************************************************/
 void f_co_write_ProtocollHeader(char destination_id){
 	
 	DDRD = 0x04;
@@ -127,3 +181,5 @@ void f_co_write_ProtocollHeader(char destination_id){
 	f_co_write_Byte(destination_id);
 	f_co_write_Byte(source_id);
 }
+
+/************************************************************************/
