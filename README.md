@@ -98,11 +98,11 @@ co_io - funktionen
 
 ### f_co_SendTaste
 
-![f_co_SendTaste](./images/strg/f_co_SendTaste.PNG "f_co_SendTaste")
+![f_co_SendTaste](./images/strg/f_co_sendTaste.PNG "f_co_SendTaste")
 
 ### f_co_SendText
 
-![f_co_SendText](./images/strg/f_co_SendText.PNG "f_co_SendText")
+![f_co_SendText](./images/strg/f_co_Text.PNG "f_co_SendText")
 
 ### f_co_InitProtocol
 
